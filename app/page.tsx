@@ -1,113 +1,197 @@
-import Image from "next/image";
+'use client';
 
-export default function Home() {
-  return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="z-10 w-full max-w-5xl items-center justify-between font-mono text-sm lg:flex">
-        <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
-          Get started by editing&nbsp;
-          <code className="font-mono font-bold">app/page.tsx</code>
-        </p>
-        <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:size-auto lg:bg-none">
-          <a
-            className="pointer-events-none flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0"
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{" "}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className="dark:invert"
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
-        </div>
-      </div>
+import axios from 'axios';
+import toast from 'react-hot-toast';
+import { useEffect, useState, ChangeEvent, ChangeEventHandler } from 'react';
+import { Search, StickyNote } from 'lucide-react';
 
-      <div className="relative z-[-1] flex place-items-center before:absolute before:h-[300px] before:w-full before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-full after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700 before:dark:opacity-10 after:dark:from-sky-900 after:dark:via-[#0141ff] after:dark:opacity-40 sm:before:w-[480px] sm:after:w-[240px] before:lg:h-[360px]">
-        <Image
-          className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
+import { Comic } from '@/type';
+import { HoverEffect } from '@/components/ui/card-hover-effect-3d';
+import { ModeToggle } from '@/components/mode-toggle';
+import {
+	Pagination,
+	PaginationContent,
+	PaginationEllipsis,
+	PaginationItem,
+	PaginationLink,
+	PaginationNext,
+	PaginationPrevious,
+} from '@/components/ui/pagination';
+import { Input } from '@/components/ui/input';
+import { useDebounce } from '@/hooks/use-debounce';
+import Heading from '@/components/heading';
 
-      <div className="mb-32 grid text-center lg:mb-0 lg:w-full lg:max-w-5xl lg:grid-cols-4 lg:text-left">
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Docs{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-sm opacity-50">
-            Find in-depth information about Next.js features and API.
-          </p>
-        </a>
+const Home = () => {
+	// fetch data
+	const [data, setData] = useState<Comic[]>([]);
 
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Learn{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-sm opacity-50">
-            Learn about Next.js in an interactive course with&nbsp;quizzes!
-          </p>
-        </a>
+	// Manage research
+	const [title, setTitle] = useState('');
+	const debounceTitle = useDebounce<string>(title, 500);
+	const onTitleChange: ChangeEventHandler<HTMLInputElement> = (e) => {
+		setTitle(e.target.value);
+	};
 
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Templates{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-sm opacity-50">
-            Explore starter templates for Next.js.
-          </p>
-        </a>
+	// Manage page
+	const [page, setPage] = useState(1);
+	const [totalPages, setTotalPages] = useState(6000);
+	const handlePrevious = () => {
+		if (page > 1) {
+			setPage(page - 1);
+		}
+	};
+	const handleNext = () => {
+		if (page < totalPages) {
+			setPage(page + 1);
+		}
+	};
+	const handlePageChange = (e: ChangeEvent<HTMLInputElement>) => {
+		const newPage = parseInt(e.target.value);
+		if (!isNaN(newPage) && newPage > 0) {
+			setPage(newPage);
+		}
+	};
+	// -----------------
 
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Deploy{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-balance text-sm opacity-50">
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
-  );
-}
+	useEffect(() => {
+		const fetchData = async () => {
+			try {
+				const response = await axios.get(
+					`${process.env.NEXT_PUBLIC_API_URL}/comics?page=${page}&title=${debounceTitle}`
+				);
+				setData(response.data.data.results);
+
+				const totalResults = response.data.data.total;
+				const offset = 20;
+				const calculatedTotalPages = Math.ceil(totalResults / offset);
+				setTotalPages(calculatedTotalPages);
+
+				console.log(response.data.data.results);
+			} catch (error) {
+				toast.error('Something went wrong!');
+			}
+		};
+		fetchData();
+	}, [page, debounceTitle]);
+
+	return (
+		<div className="flex-center mx-auto common-padding bg-background font-comic ">
+			<div className="w-full max-w-[1400px] flex flex-col dark:bg-dot-red-100/[0.2] bg-dot-red-800/[0.2]">
+				<div className="flex justify-between">
+					<ModeToggle />
+				</div>
+
+				<Heading
+					title="Marvel Universe Comics Catalog"
+					subTitle="Click a Card to Dive Deeper into Your Favorite Comic!"
+				/>
+				{/* La recherche d'un titre */}
+				<div className="flex flex-col justify-center items-center gap-3 mb-10 ">
+					<div className="h5">Search a title</div>
+					<div className="relative flex w-1/3 min-w-96">
+						<Search className="absolute w-6 h-6 top-1/2 transform -translate-y-1/2 left-3 text-gray-500" />
+						<Input
+							className="pl-10 pr-3 py-2 w-full  "
+							type={'text'}
+							placeholder="What comic do you want?"
+							onChange={onTitleChange}
+						/>
+					</div>
+				</div>
+
+				<HoverEffect className="" items={data} />
+
+				{/* Le composant de pagination */}
+				<Pagination className="mt-10">
+					<PaginationContent>
+						<PaginationItem>
+							<PaginationPrevious
+								href="#"
+								onClick={(e) => {
+									e.preventDefault();
+									handlePrevious();
+								}}
+								className={page === 1 ? 'pointer-events-none opacity-50' : ''}
+							/>
+						</PaginationItem>
+
+						{/* Affichage des liens de pagination en fonction de la page actuelle et du nombre total de pages */}
+						{page > 1 && (
+							<PaginationItem>
+								<PaginationLink
+									href="#"
+									onClick={(e) => {
+										e.preventDefault();
+										handlePrevious();
+									}}
+								>
+									{page - 1}
+								</PaginationLink>
+							</PaginationItem>
+						)}
+
+						<PaginationItem>
+							<PaginationLink href="#">{page}</PaginationLink>
+						</PaginationItem>
+
+						{page < totalPages && (
+							<PaginationItem>
+								<PaginationLink
+									href="#"
+									onClick={(e) => {
+										e.preventDefault();
+										handleNext();
+									}}
+								>
+									{page + 1}
+								</PaginationLink>
+							</PaginationItem>
+						)}
+
+						<PaginationItem>
+							<PaginationEllipsis />
+						</PaginationItem>
+						<PaginationItem>
+							<PaginationLink
+								href="#"
+								onClick={(e) => {
+									e.preventDefault();
+									setPage(totalPages);
+								}}
+							>
+								{totalPages}
+							</PaginationLink>
+						</PaginationItem>
+						<PaginationItem>
+							<PaginationNext
+								href="#"
+								onClick={(e) => {
+									e.preventDefault();
+									handleNext();
+								}}
+							/>
+						</PaginationItem>
+					</PaginationContent>
+				</Pagination>
+
+				{/* Le input de la pagination */}
+				<div className="flex justify-center items-center gap-3 relative mb-10 ">
+					<div>Page</div>
+					<Input
+						type={'number'}
+						className="flex w-max relative"
+						placeholder="page number"
+						value={page}
+						onChange={(e) => {
+							e.preventDefault();
+							handlePageChange(e);
+						}}
+					/>
+					<StickyNote className=" absolute w-6 h-6 top-1/2 left-1/2 -my-3 mx-16" />
+				</div>
+			</div>
+		</div>
+	);
+};
+
+export default Home;
