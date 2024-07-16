@@ -5,8 +5,8 @@ import toast from 'react-hot-toast';
 import { useEffect, useState, ChangeEvent, ChangeEventHandler } from 'react';
 import { Search, StickyNote } from 'lucide-react';
 
-import { Comic } from '@/type';
-import { HoverEffect } from '@/components/ui/card-hover-effect-3d';
+import { Character } from '@/type';
+import { HoverEffect } from '@/components/ui/card-hover-effect-3d-characters';
 import { ModeToggle } from '@/components/mode-toggle';
 import {
 	Pagination,
@@ -21,15 +21,15 @@ import { Input } from '@/components/ui/input';
 import { useDebounce } from '@/hooks/use-debounce';
 import Heading from '@/components/heading';
 
-const Home = () => {
+const CharactersPage = () => {
 	// fetch data
-	const [data, setData] = useState<Comic[]>([]);
+	const [data, setData] = useState<Character[]>([]);
 
 	// Manage research
-	const [title, setTitle] = useState('');
-	const debounceTitle = useDebounce<string>(title, 500);
-	const onTitleChange: ChangeEventHandler<HTMLInputElement> = (e) => {
-		setTitle(e.target.value);
+	const [name, setName] = useState('');
+	const debounceName = useDebounce<string>(name, 500);
+	const onNameChange: ChangeEventHandler<HTMLInputElement> = (e) => {
+		setName(e.target.value);
 	};
 
 	// Manage page
@@ -57,7 +57,7 @@ const Home = () => {
 		const fetchData = async () => {
 			try {
 				const response = await axios.get(
-					`${process.env.NEXT_PUBLIC_API_URL}/comics?page=${page}&title=${debounceTitle}`
+					`${process.env.NEXT_PUBLIC_API_URL}/characters?page=${page}&name=${debounceName}`
 				);
 				setData(response.data.data.results);
 
@@ -72,7 +72,7 @@ const Home = () => {
 			}
 		};
 		fetchData();
-	}, [page, debounceTitle]);
+	}, [page, debounceName]);
 
 	return (
 		<div className="flex-center mx-auto common-padding bg-background font-comic ">
@@ -82,24 +82,24 @@ const Home = () => {
 				</div>
 
 				<Heading
-					title="Marvel Universe Comics Catalog"
-					subTitle="Click a Card to Dive Deeper into Your Favorite Comic!"
+					title="Marvel Universe Characters Catalog"
+					subTitle="Click a Card to Dive Deeper into Your Favorite Character !"
 				/>
 				{/* La recherche d'un titre */}
 				<div className="flex flex-col justify-center items-center gap-3 mb-10 ">
-					<div className="h5">Search a title</div>
+					<div className="h5">Search a name</div>
 					<div className="relative flex w-1/3 min-w-96">
 						<Search className="absolute w-6 h-6 top-1/2 transform -translate-y-1/2 left-3 text-gray-500" />
 						<Input
 							className="pl-10 pr-3 py-2 w-full  "
 							type={'text'}
 							placeholder="What comic do you want?"
-							onChange={onTitleChange}
+							onChange={onNameChange}
 						/>
 					</div>
 				</div>
 
-				<HoverEffect className="" items={data} />
+				<HoverEffect items={data} />
 
 				{/* Le composant de pagination */}
 				<Pagination className="mt-10">
@@ -194,4 +194,4 @@ const Home = () => {
 	);
 };
 
-export default Home;
+export default CharactersPage;

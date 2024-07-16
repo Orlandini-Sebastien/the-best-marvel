@@ -7,3 +7,13 @@ export interface Comic {
 		extension: string;
 	}[];
 }
+
+export interface Character {
+	id: number;
+	name: string;
+	description: string;
+	thumbnail: {
+		path: string;
+		extension: string;
+	};
+}

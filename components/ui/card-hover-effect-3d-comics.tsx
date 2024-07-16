@@ -33,7 +33,7 @@ export const HoverEffect = ({
 		>
 			{items.map((item) => (
 				<Link
-					href={item?.id.toString()}
+					href={'comics/' + item?.id.toString()}
 					key={item?.id}
 					className="relative group block h-full w-full p-2 py-4 "
 					onMouseEnter={() => setHoveredIndex(item?.id)}

@@ -5,7 +5,7 @@ const md5 = require('md5');
 export async function GET(req: Request) {
 	const { searchParams } = new URL(req.url);
 	const page = searchParams.get('page');
-	const title = searchParams.get('title');
+	const name = searchParams.get('name');
 	const pageNumber = page ? parseInt(page) : 1;
 	try {
 		const publicKey = process.env.NEXT_PUBLIC_API_KEY;
@@ -21,12 +21,12 @@ export async function GET(req: Request) {
 		};
 
 		// Ajouter le titre aux paramètres uniquement s'il n'est pas vide
-		if (title && title !== '') {
-			params.titleStartsWith = title;
+		if (name && name !== '') {
+			params.nameStartsWith = name;
 		}
 
 		const response = await axios.get(
-			`http://gateway.marvel.com/v1/public/comics`,
+			`http://gateway.marvel.com/v1/public/characters`,
 			{
 				params: params,
 				headers: {
@@ -39,7 +39,7 @@ export async function GET(req: Request) {
 
 		return NextResponse.json(data);
 	} catch (error) {
-		console.log('[GET_COMICS]', error);
+		console.log('[GET_CHARACTERS]', error);
 		return new NextResponse('Internal error', { status: 500 });
 	}
 }
