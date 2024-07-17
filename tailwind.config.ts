@@ -104,6 +104,9 @@ const config = {
         scroll:
         "scroll var(--animation-duration, 40s) var(--animation-direction, forwards) linear infinite",
       },
+      backgroundImage : {
+        "radial-gradient": "radial-gradient(var(--tw-gradient-stops))",
+      }
     },
   },
   plugins: [require("tailwindcss-animate"),

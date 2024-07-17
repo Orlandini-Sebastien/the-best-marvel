@@ -1,5 +1,10 @@
-export const GradientLight = () => {
-  return (
-    <div className="absolute top-0 left-1/4 w-full aspect-square bg-radial-gradient from-[#28206C] to-[#28206C]/0 to-70% pointer-events-none " />
-  );
+const BackgroundLight = () => {
+	return (
+		<div className="relative w-full aspect-square">
+			{/* Conteneur pour l'effet de lumière */}
+			<div className="absolute inset-0 radial-light border-2 border-red-400"></div>
+		</div>
+	);
 };
+
+export default BackgroundLight;

@@ -100,3 +100,7 @@
 		@apply font-semibold text-base max-md:text-xs leading-8;
 	}
 }
+
+.radial-light {
+	background-image: radial-gradient(circle, #6c2320 0%, #ffffff00 70%);
+  }
