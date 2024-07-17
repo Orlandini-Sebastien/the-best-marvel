@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { useState } from 'react';
 import { CardContainer, CardBody, CardItem } from './3d-card';
 
-import { GradientLight } from '@/design/gradient-light';
+
 import { Character } from '@/type';
 
 export const HoverEffect = ({
@@ -58,7 +58,7 @@ export const HoverEffect = ({
 
 							{/* Ajout d'un element de design  */}
 
-							<GradientLight />
+							
 							<Card>
 								<CardContainer>
 									<CardBody className="flex flex-col items-center p-4 space-y-4">

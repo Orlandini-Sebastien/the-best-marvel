@@ -20,6 +20,7 @@ import {
 import { Input } from '@/components/ui/input';
 import { useDebounce } from '@/hooks/use-debounce';
 import Heading from '@/components/heading';
+import WaterDropCards from '@/components/water-drop-cards';
 
 const CharactersPage = () => {
 	// fetch data
@@ -99,7 +100,7 @@ const CharactersPage = () => {
 					</div>
 				</div>
 
-				<HoverEffect items={data} />
+				<WaterDropCards items={data} />
 
 				{/* Le composant de pagination */}
 				<Pagination className="mt-10">
