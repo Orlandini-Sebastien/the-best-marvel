@@ -23,6 +23,9 @@ import Heading from '@/components/heading';
 import Image from 'next/image';
 import { DirectionAwareHover } from '@/components/direction-aware-hover-series';
 
+import { motion } from 'framer-motion';
+import { HeroHighlight, Highlight } from '@/components/ui/hero-hightlight';
+
 const ComicsPage = () => {
 	// fetch data
 	const [data, setData] = useState<Serie[]>([]);
@@ -83,10 +86,31 @@ const ComicsPage = () => {
 					<ModeToggle />
 				</div>
 
-				<Heading
-					title="Marvel Universe Series Catalog"
-					subTitle="Click a Card to Dive Deeper into Your Favorite serie!"
-				/>
+				<HeroHighlight>
+					<motion.h1
+						initial={{
+							opacity: 0,
+							y: 20,
+						}}
+						animate={{
+							opacity: 1,
+							y: [20, -5, 0],
+						}}
+						transition={{
+							duration: 0.5,
+							ease: [0.4, 0.0, 0.2, 1],
+						}}
+						className="text-2xl px-4 md:text-4xl lg:text-5xl font-bold text-neutral-700 dark:text-white max-w-4xl leading-relaxed lg:leading-snug text-center mx-auto "
+					>
+						Marvel Universe
+						<Highlight className="text-black dark:text-white">Series</Highlight>
+						Catalog
+						<div className="h4">
+							Click a Card to Dive Deeper into Your Favorite serie!
+						</div>
+					</motion.h1>
+				</HeroHighlight>
+
 				{/* La recherche d'un titre */}
 				<div className="flex flex-col justify-center items-center gap-3 mb-10 ">
 					<div className="h3">Search a serie</div>

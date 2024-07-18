@@ -57,7 +57,7 @@ export const DirectionAwareHover = ({
 	};
 
 	return (
-		<div className="grid justify-center items-center grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4 p-10">
+		<div className="grid self-center justify-center items-center grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4 p-10">
 			{data.map((serie) => {
 				const ref = useRef<HTMLDivElement>(null);
 				const [direction, setDirection] = useState<string>('left');
