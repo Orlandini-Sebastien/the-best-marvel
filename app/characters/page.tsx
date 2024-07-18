@@ -6,7 +6,7 @@ import { useEffect, useState, ChangeEvent, ChangeEventHandler } from 'react';
 import { Search, StickyNote } from 'lucide-react';
 
 import { Character } from '@/type';
-import { HoverEffect } from '@/components/ui/card-hover-effect-3d-characters';
+
 import { ModeToggle } from '@/components/mode-toggle';
 import {
 	Pagination,
@@ -21,6 +21,7 @@ import { Input } from '@/components/ui/input';
 import { useDebounce } from '@/hooks/use-debounce';
 import Heading from '@/components/heading';
 import WaterDropCards from '@/components/water-drop-cards';
+
 
 const CharactersPage = () => {
 	// fetch data
@@ -87,12 +88,12 @@ const CharactersPage = () => {
 					subTitle="Click a Card to Dive Deeper into Your Favorite Character !"
 				/>
 				{/* La recherche d'un titre */}
-				<div className="flex flex-col justify-center items-center gap-3 mb-10 ">
-					<div className="h5">Search a name</div>
+				<div className="flex flex-col justify-center items-center gap-3 mb-40 ">
+					<div className="h3">Search a name</div>
 					<div className="relative flex w-1/3 min-w-96">
 						<Search className="absolute w-6 h-6 top-1/2 transform -translate-y-1/2 left-3 text-gray-500" />
 						<Input
-							className="pl-10 pr-3 py-2 w-full  "
+							className="pl-10 h-14 pr-3 py-2 w-full h4  "
 							type={'text'}
 							placeholder="What comic do you want?"
 							onChange={onNameChange}
