@@ -15,6 +15,7 @@ import { Character } from '@/type';
 import ClipPath from '@/svg/ClipPath';
 import GradienBorderSVG from '@/svg/GradientBorderSVG';
 import BackgroundLight from '@/design/gradient-light';
+import Link from 'next/link';
 
 interface WaterDropCardsProps {
 	items: Character[];
@@ -101,7 +102,10 @@ const WaterDropCards: React.FC<WaterDropCardsProps> = ({ items }) => {
 					{row.map((item) => (
 						<ScrollParallax key={item.id} strength={0.1 + Math.random() * 0.2}>
 							{/* Image avec clipPath et avec une bordure SVG */}
-							<div className="relative w-[600px] group flex justify-center items-center">
+							<Link
+								href={'characters/' + item?.id.toString()}
+								className="relative w-[600px] group flex justify-center items-center"
+							>
 								<ClipPath />
 								{/* L'image */}
 								<div
@@ -158,7 +162,7 @@ const WaterDropCards: React.FC<WaterDropCardsProps> = ({ items }) => {
 										</motion.div>
 									)}
 								</AnimatePresence>
-							</div>
+							</Link>
 						</ScrollParallax>
 					))}
 				</div>
