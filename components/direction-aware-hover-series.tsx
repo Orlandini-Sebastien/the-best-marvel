@@ -125,7 +125,7 @@ export const DirectionAwareHover = ({
 						</AnimatePresence>
 					</motion.div>
 				) : (
-					<GlareCard className="text-white absolute w-full h-full  left-1/2 transform -translate-x-1/2 z-40 justify-center items-center flex gap-4">
+					<GlareCard className="text-white absolute w-full h-full  left-1/2 transform -translate-x-1/2 z-40 justify-center items-start flex gap-4 p-4">
 						<div className="h5">{serie.title}</div>
 						<div className="h6">{serie.description}</div>
 					</GlareCard>
