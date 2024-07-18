@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef, useState, MouseEvent } from 'react';
+import { useRef, useState, MouseEvent, useEffect } from 'react';
 import Image from 'next/image';
 import { AnimatePresence, motion } from 'framer-motion';
 import { cn } from '@/lib/utils';
@@ -20,32 +20,46 @@ export const DirectionAwareHover = ({
 	className,
 	data,
 }: DirectionAwareHoverProps) => {
+	const refs = useRef<(HTMLDivElement | null)[]>([]);
+	const [directions, setDirections] = useState<string[]>(
+		Array(data.length).fill('left')
+	);
+
+	useEffect(() => {
+		// Initialize refs.current with the same length as data
+		refs.current = refs.current.slice(0, data.length);
+	}, [data.length]);
+
 	const handleMouseEnter = (
 		event: MouseEvent<HTMLDivElement>,
-		ref: React.RefObject<HTMLDivElement>,
-		setDirection: React.Dispatch<React.SetStateAction<string>>
+		index: number
 	) => {
-		if (!ref.current) return;
+		const ref = refs.current[index];
+		if (!ref) return;
 
-		const direction = getDirection(event, ref.current);
+		const direction = getDirection(event, ref);
 		console.log('direction', direction);
-		switch (direction) {
-			case 0:
-				setDirection('top');
-				break;
-			case 1:
-				setDirection('right');
-				break;
-			case 2:
-				setDirection('bottom');
-				break;
-			case 3:
-				setDirection('left');
-				break;
-			default:
-				setDirection('left');
-				break;
-		}
+		setDirections((prevDirections) => {
+			const newDirections = [...prevDirections];
+			switch (direction) {
+				case 0:
+					newDirections[index] = 'top';
+					break;
+				case 1:
+					newDirections[index] = 'right';
+					break;
+				case 2:
+					newDirections[index] = 'bottom';
+					break;
+				case 3:
+					newDirections[index] = 'left';
+					break;
+				default:
+					newDirections[index] = 'left';
+					break;
+			}
+			return newDirections;
+		});
 	};
 
 	const getDirection = (ev: MouseEvent<HTMLDivElement>, obj: HTMLElement) => {
@@ -58,15 +72,14 @@ export const DirectionAwareHover = ({
 
 	return (
 		<div className="grid self-center justify-center items-center grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4 p-10">
-			{data.map((serie) => {
-				const ref = useRef<HTMLDivElement>(null);
-				const [direction, setDirection] = useState<string>('left');
-
-				return serie.thumbnail.path !==
-					'http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available' ? (
+			{data.map((serie, index) =>
+				serie.thumbnail.path !==
+				'http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available' ? (
 					<motion.div
-						onMouseEnter={(e) => handleMouseEnter(e, ref, setDirection)}
-						ref={ref}
+						onMouseEnter={(e) => handleMouseEnter(e, index)}
+						ref={(el) => {
+							refs.current[index] = el;
+						}}
 						className={cn(
 							'md:h-96 w-60 h-60 md:w-96 bg-transparent rounded-lg overflow-hidden group/card relative',
 							className
@@ -77,7 +90,7 @@ export const DirectionAwareHover = ({
 							<motion.div
 								className="relative h-full w-full"
 								initial="initial"
-								whileHover={direction}
+								whileHover={directions[index]}
 								exit="exit"
 							>
 								<motion.div className="group-hover/card:block hidden absolute inset-0 w-full h-full bg-black/40 z-10 transition duration-500" />
@@ -89,7 +102,6 @@ export const DirectionAwareHover = ({
 										ease: 'easeOut',
 									}}
 								>
-									{' '}
 									{serie.thumbnail.path !==
 										'http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available' && (
 										<Image
@@ -114,7 +126,7 @@ export const DirectionAwareHover = ({
 										ease: 'easeOut',
 									}}
 									className={cn(
-										'text-white absolute top-4 left-4 z-40 max-h-[380px] overflow-y-scroll', // Ensure proper scroll with max height and padding
+										'text-white absolute top-4 left-4 z-40 max-h-[380px] overflow-y-scroll',
 										childrenClassName
 									)}
 								>
@@ -125,12 +137,15 @@ export const DirectionAwareHover = ({
 						</AnimatePresence>
 					</motion.div>
 				) : (
-					<GlareCard className="text-white absolute w-full h-full  left-1/2 transform -translate-x-1/2 z-40 justify-center items-start flex gap-4 p-4">
+					<GlareCard
+						key={serie.id}
+						className="text-white absolute w-full h-full left-1/2 transform -translate-x-1/2 z-40 justify-center items-start flex gap-4 p-4"
+					>
 						<div className="h5">{serie.title}</div>
 						<div className="h6">{serie.description}</div>
 					</GlareCard>
-				);
-			})}
+				)
+			)}
 		</div>
 	);
 };
