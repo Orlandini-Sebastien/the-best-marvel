@@ -100,12 +100,12 @@ const ComicsPage = () => {
 							duration: 0.5,
 							ease: [0.4, 0.0, 0.2, 1],
 						}}
-						className="text-2xl px-4 md:text-4xl lg:text-5xl font-bold text-neutral-700 dark:text-white max-w-4xl leading-relaxed lg:leading-snug text-center mx-auto "
+						className="px-4 h1 font-bold text-neutral-700 dark:text-white max-w-4xl leading-relaxed lg:leading-snug text-center mx-auto "
 					>
 						Marvel Universe
-						<Highlight className="text-black dark:text-white">Series</Highlight>
+						<Highlight className="text-primary">Series</Highlight>
 						Catalog
-						<div className="h4">
+						<div className="h4 text-primary/70">
 							Click a Card to Dive Deeper into Your Favorite serie!
 						</div>
 					</motion.h1>
