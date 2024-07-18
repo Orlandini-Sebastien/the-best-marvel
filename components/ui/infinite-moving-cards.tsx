@@ -109,7 +109,7 @@ export const InfiniteMovingCards = ({
 									/>
 								) : (
 									<Image
-										src={`${item.images[0].path}.${item.images[0].extension}`}
+										src={`${item.thumbnail.path}.${item.thumbnail.extension}`}
 										width={400}
 										height={500}
 										alt={item.title}
