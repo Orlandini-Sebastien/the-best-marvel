@@ -18,7 +18,7 @@ export const HoverEffect = ({
 	return (
 		<div
 			className={cn(
-				'grid grid-cols-1 lg:grid-cols-2  min-[1330px]:grid-cols-3 gap-4 ',
+				'grid grid-cols-1 lg:grid-cols-2  min-[1330px]:grid-cols-3 gap-10 self-center ',
 				className
 			)}
 		>
@@ -26,7 +26,7 @@ export const HoverEffect = ({
 				<Link
 					href={'comics/' + item?.id.toString()}
 					key={item?.id}
-					className="relative group block h-full w-full p-2 py-4 "
+					className="relative group block h-full w-full p-2  "
 					onMouseEnter={() => setHoveredIndex(item?.id.toString())}
 					onMouseLeave={() => setHoveredIndex(null)}
 				>
@@ -44,11 +44,11 @@ export const HoverEffect = ({
 										initial={{ opacity: 0 }}
 										animate={{
 											opacity: 1,
-											transition: { duration: 0.15 },
+											transition: { duration: 0.3 },
 										}}
 										exit={{
 											opacity: 0,
-											transition: { duration: 0.15, delay: 0.2 },
+											transition: { duration: 0.3, delay: 0.2 },
 										}}
 									/>
 								)}

@@ -3,8 +3,8 @@
 import axios from 'axios';
 import toast from 'react-hot-toast';
 import { useEffect, useState, ChangeEvent, ChangeEventHandler } from 'react';
-import { Search, StickyNote } from 'lucide-react';
-
+import { StickyNote } from 'lucide-react';
+import { useMotionValue, motion, useMotionTemplate } from 'framer-motion';
 import { Character } from '@/type';
 
 import { ModeToggle } from '@/components/mode-toggle';
@@ -21,9 +21,12 @@ import { Input } from '@/components/ui/input';
 import { useDebounce } from '@/hooks/use-debounce';
 import Heading from '@/components/heading';
 import WaterDropCards from '@/components/water-drop-cards-characters';
-
+import SearchBar from '@/components/search-bar';
 
 const CharactersPage = () => {
+	//loading
+	const [isLoading, setIsLoading] = useState(true);
+
 	// fetch data
 	const [data, setData] = useState<Character[]>([]);
 
@@ -56,6 +59,7 @@ const CharactersPage = () => {
 	// -----------------
 
 	useEffect(() => {
+		setIsLoading(true);
 		const fetchData = async () => {
 			try {
 				const response = await axios.get(
@@ -67,7 +71,7 @@ const CharactersPage = () => {
 				const offset = 20;
 				const calculatedTotalPages = Math.ceil(totalResults / offset);
 				setTotalPages(calculatedTotalPages);
-
+				setIsLoading(false);
 				console.log(response.data.data.results);
 			} catch (error) {
 				toast.error('Something went wrong!');
@@ -84,113 +88,135 @@ const CharactersPage = () => {
 				</div>
 
 				<Heading
-					title="Marvel Universe Characters Catalog"
-					subTitle="Click a Card to Dive Deeper into Your Favorite Character !"
+					title1="Mavel Univers"
+					title2="Characters"
+					title3="Catalog"
+					title4="Click a Card to Dive Deeper into Your Favorite Character!"
 				/>
-				{/* La recherche d'un titre */}
-				<div className="flex flex-col justify-center items-center gap-3 mb-40 ">
-					<div className="h3">Search a name</div>
-					<div className="relative flex w-1/3 min-w-96">
-						<Search className="absolute w-6 h-6 top-1/2 transform -translate-y-1/2 left-3 text-gray-500" />
-						<Input
-							className="pl-10 h-14 pr-3 py-2 w-full h4  "
-							type={'text'}
-							placeholder="What comic do you want?"
-							onChange={onNameChange}
-						/>
-					</div>
-				</div>
 
-				<WaterDropCards items={data} />
-
-				{/* Le composant de pagination */}
-				<Pagination className="mt-10">
-					<PaginationContent>
-						<PaginationItem>
-							<PaginationPrevious
-								href="#"
-								onClick={(e) => {
-									e.preventDefault();
-									handlePrevious();
-								}}
-								className={page === 1 ? 'pointer-events-none opacity-50' : ''}
-							/>
-						</PaginationItem>
-
-						{/* Affichage des liens de pagination en fonction de la page actuelle et du nombre total de pages */}
-						{page > 1 && (
-							<PaginationItem>
-								<PaginationLink
-									href="#"
-									onClick={(e) => {
-										e.preventDefault();
-										handlePrevious();
-									}}
-								>
-									{page - 1}
-								</PaginationLink>
-							</PaginationItem>
-						)}
-
-						<PaginationItem>
-							<PaginationLink href="#">{page}</PaginationLink>
-						</PaginationItem>
-
-						{page < totalPages && (
-							<PaginationItem>
-								<PaginationLink
-									href="#"
-									onClick={(e) => {
-										e.preventDefault();
-										handleNext();
-									}}
-								>
-									{page + 1}
-								</PaginationLink>
-							</PaginationItem>
-						)}
-
-						<PaginationItem>
-							<PaginationEllipsis />
-						</PaginationItem>
-						<PaginationItem>
-							<PaginationLink
-								href="#"
-								onClick={(e) => {
-									e.preventDefault();
-									setPage(totalPages);
-								}}
-							>
-								{totalPages}
-							</PaginationLink>
-						</PaginationItem>
-						<PaginationItem>
-							<PaginationNext
-								href="#"
-								onClick={(e) => {
-									e.preventDefault();
-									handleNext();
-								}}
-							/>
-						</PaginationItem>
-					</PaginationContent>
-				</Pagination>
-
-				{/* Le input de la pagination */}
-				<div className="flex justify-center items-center gap-3 relative mb-10 ">
-					<div>Page</div>
-					<Input
-						type={'number'}
-						className="flex w-max relative"
-						placeholder="page number"
-						value={page}
-						onChange={(e) => {
-							e.preventDefault();
-							handlePageChange(e);
+				{isLoading ? (
+					// En cours --------------- motion subtitle / animation perso scoll
+					// model 3D qui va en loading
+					<motion.div
+						initial={{
+							opacity: 0,
+							y: 20,
 						}}
-					/>
-					<StickyNote className=" absolute w-6 h-6 top-1/2 left-1/2 -my-3 mx-16" />
-				</div>
+						animate={{
+							opacity: 1,
+							y: [20, -5, 0],
+						}}
+						transition={{
+							delay: 0.5,
+							duration: 0.5,
+							ease: [0.4, 0.0, 0.2, 1],
+						}}
+						className="text-foreground flex justify-center items-center h-1/2 w-full"
+					>
+						is Loading...
+					</motion.div>
+				) : (
+					<div>
+						<SearchBar
+							title="Search a character"
+							placeholder="Which character do you want?"
+							onTitleChange={onNameChange}
+						/>
+
+						<WaterDropCards items={data} />
+
+						{/* Le composant de pagination */}
+						<Pagination className="mt-10">
+							<PaginationContent>
+								<PaginationItem>
+									<PaginationPrevious
+										href="#"
+										onClick={(e) => {
+											e.preventDefault();
+											handlePrevious();
+										}}
+										className={
+											page === 1 ? 'pointer-events-none opacity-50' : ''
+										}
+									/>
+								</PaginationItem>
+
+								{/* Affichage des liens de pagination en fonction de la page actuelle et du nombre total de pages */}
+								{page > 1 && (
+									<PaginationItem>
+										<PaginationLink
+											href="#"
+											onClick={(e) => {
+												e.preventDefault();
+												handlePrevious();
+											}}
+										>
+											{page - 1}
+										</PaginationLink>
+									</PaginationItem>
+								)}
+
+								<PaginationItem>
+									<PaginationLink href="#">{page}</PaginationLink>
+								</PaginationItem>
+
+								{page < totalPages && (
+									<PaginationItem>
+										<PaginationLink
+											href="#"
+											onClick={(e) => {
+												e.preventDefault();
+												handleNext();
+											}}
+										>
+											{page + 1}
+										</PaginationLink>
+									</PaginationItem>
+								)}
+
+								<PaginationItem>
+									<PaginationEllipsis />
+								</PaginationItem>
+								<PaginationItem>
+									<PaginationLink
+										href="#"
+										onClick={(e) => {
+											e.preventDefault();
+											setPage(totalPages);
+										}}
+									>
+										{totalPages}
+									</PaginationLink>
+								</PaginationItem>
+								<PaginationItem>
+									<PaginationNext
+										href="#"
+										onClick={(e) => {
+											e.preventDefault();
+											handleNext();
+										}}
+									/>
+								</PaginationItem>
+							</PaginationContent>
+						</Pagination>
+
+						{/* Le input de la pagination */}
+						<div className="flex justify-center items-center gap-3 relative mb-10 ">
+							<div>Page</div>
+							<Input
+								type={'number'}
+								className="flex w-max relative"
+								placeholder="page number"
+								value={page}
+								onChange={(e) => {
+									e.preventDefault();
+									handlePageChange(e);
+								}}
+							/>
+							<StickyNote className=" absolute w-6 h-6 top-1/2 left-1/2 -my-3 mx-16" />
+						</div>
+					</div>
+				)}
 			</div>
 		</div>
 	);

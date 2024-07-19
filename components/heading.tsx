@@ -1,17 +1,52 @@
-import { Separator } from './ui/separator';
+'use client';
+import { cn } from '@/lib/utils';
+import { useMotionValue, motion, useMotionTemplate } from 'framer-motion';
+import React from 'react';
+import { HeroHighlight, Highlight } from './ui/hero-hightlight';
+import { TextGenerateEffect } from './ui/text-generate-effect';
 
 interface HeadingProps {
-	title: string;
-	subTitle: string;
+	title1: string;
+	title2: string;
+	title3: string;
+	title4: string;
 }
 
-const Heading: React.FC<HeadingProps> = ({ title, subTitle }) => {
+const Heading: React.FC<HeadingProps> = ({
+	title1,
+	title2,
+	title3,
+	title4,
+}) => {
 	return (
-		<div className="common-padding">
-			<h1 className="h2">{title}</h1>
-			<Separator className="w-1/2 h-1 mb-1" />
-			<h5 className="h6">{subTitle}</h5>
-		</div>
+		<>
+			{' '}
+			<HeroHighlight>
+				<motion.h1
+					initial={{
+						opacity: 0,
+						y: 20,
+					}}
+					animate={{
+						opacity: 1,
+						y: [20, -5, 0],
+					}}
+					transition={{
+						duration: 0.5,
+						ease: [0.4, 0.0, 0.2, 1],
+					}}
+					className="px-4 h1 font-bold text-neutral-700 dark:text-white max-w-4xl leading-relaxed lg:leading-snug text-center mx-auto "
+				>
+					{title1}
+					<Highlight className="text-primary">{title2}</Highlight>
+					{title3}{' '}
+					<TextGenerateEffect
+						words={title4}
+						className="h4 text-neutral-700/80 dark:text-white/80"
+					/>
+				</motion.h1>
+			</HeroHighlight>
+		</>
 	);
 };
 

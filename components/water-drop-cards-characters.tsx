@@ -16,6 +16,7 @@ import ClipPath from '@/svg/ClipPath';
 import GradienBorderSVG from '@/svg/GradientBorderSVG';
 import BackgroundLight from '@/design/gradient-light';
 import Link from 'next/link';
+import { GlareCard } from './ui/glare-card';
 
 interface WaterDropCardsProps {
 	items: Character[];
@@ -87,13 +88,13 @@ const WaterDropCards: React.FC<WaterDropCardsProps> = ({ items }) => {
 	const rows = getRows(items, isMediumScreen);
 
 	return (
-		<div className="flex  justify-center items-center flex-col space-y-4">
+		<div className="flex   justify-center items-center flex-col mt-20">
 			{rows.map((row, rowIndex) => (
 				<div
 					key={rowIndex}
-					className={`grid gap-4 justify-center items-center  ${
+					className={`grid gap-4  ${
 						row.length === 3
-							? 'grid-cols-3'
+							? 'grid-cols-3 -mx-40 '
 							: row.length === 2
 							? 'grid-cols-2'
 							: 'grid-cols-1'
@@ -111,17 +112,34 @@ const WaterDropCards: React.FC<WaterDropCardsProps> = ({ items }) => {
 								<div
 									className="absolute top-0 left-0"
 									style={{ clipPath: 'url(#drop)' }}
-									onMouseEnter={() => setHoveredIndex(item.id)}
-									onMouseLeave={() => setHoveredIndex(null)}
 								>
 									<div className="w-[600px] h-[600px]">
-										<Image
-											className="object-cover p-16"
-											src={item.thumbnail.path + '.' + item.thumbnail.extension}
-											alt={item.name}
-											fill
-											onMouseMove={handleMouseMove}
-										/>
+										{item.thumbnail.path !==
+										'http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available' ? (
+											<Image
+												className="object-cover p-16"
+												src={
+													item.thumbnail.path + '.' + item.thumbnail.extension
+												}
+												alt={item.name}
+												width={600}
+												height={600}
+												onMouseMove={handleMouseMove}
+												onMouseEnter={() => setHoveredIndex(item.id)}
+												onMouseLeave={() => setHoveredIndex(null)}
+											/>
+										) : (
+											<div className="w-full h-full absolute scale-150 top-24 left-40 hover:">
+												<GlareCard className="w-full flex-col h-full justify-center items-center flex bg-red-900">
+													<div className="mt-20 antialiased font-bold w-40 text-center">
+														{item.name}
+													</div>
+													<div className="text-xs w-40 max-h-20  text-center antialiased line-clamp-5">
+														{item.description}
+													</div>
+												</GlareCard>
+											</div>
+										)}
 									</div>
 								</div>
 								{/* La bordure */}

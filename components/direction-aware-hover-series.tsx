@@ -71,7 +71,7 @@ export const DirectionAwareHover = ({
 	};
 
 	return (
-		<div className="grid self-center justify-center items-center grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4 p-10">
+		<div className="grid self-center justify-center items-center grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-10 p-10">
 			{data.map((serie, index) =>
 				serie.thumbnail.path !==
 				'http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available' ? (
@@ -139,7 +139,7 @@ export const DirectionAwareHover = ({
 				) : (
 					<GlareCard
 						key={serie.id}
-						className="text-white absolute w-full h-full left-1/2 transform -translate-x-1/2 z-40 justify-center items-start flex gap-4 p-4"
+						className="text-white absolute w-full h-full left-1/2 transform -translate-x-1/2 z-40 justify-center items-start flex p-4 gap-4"
 					>
 						<div className="h5">{serie.title}</div>
 						<div className="h6">{serie.description}</div>

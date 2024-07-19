@@ -25,6 +25,7 @@ import { DirectionAwareHover } from '@/components/direction-aware-hover-series';
 
 import { motion } from 'framer-motion';
 import { HeroHighlight, Highlight } from '@/components/ui/hero-hightlight';
+import SearchBar from '@/components/search-bar';
 
 const ComicsPage = () => {
 	// fetch data
@@ -86,44 +87,19 @@ const ComicsPage = () => {
 					<ModeToggle />
 				</div>
 
-				<HeroHighlight>
-					<motion.h1
-						initial={{
-							opacity: 0,
-							y: 20,
-						}}
-						animate={{
-							opacity: 1,
-							y: [20, -5, 0],
-						}}
-						transition={{
-							duration: 0.5,
-							ease: [0.4, 0.0, 0.2, 1],
-						}}
-						className="px-4 h1 font-bold text-neutral-700 dark:text-white max-w-4xl leading-relaxed lg:leading-snug text-center mx-auto "
-					>
-						Marvel Universe
-						<Highlight className="text-primary">Series</Highlight>
-						Catalog
-						<div className="h4 text-primary/70">
-							Click a Card to Dive Deeper into Your Favorite serie!
-						</div>
-					</motion.h1>
-				</HeroHighlight>
+				<Heading
+					title1="Mavel Univers"
+					title2="Series"
+					title3="Catalog"
+					title4="Click a Card to Dive Deeper into Your Favorite Serie!"
+				/>
 
-				{/* La recherche d'un titre */}
-				<div className="flex flex-col justify-center items-center gap-3 mb-10 ">
-					<div className="h3">Search a serie</div>
-					<div className="relative flex w-1/3 min-w-96">
-						<Search className="absolute w-6 h-6 top-1/2 transform -translate-y-1/2 left-3 text-gray-500" />
-						<Input
-							className="pl-10 h-14 pr-3 py-2 w-full h4 "
-							type={'text'}
-							placeholder="Which serie do you want ?"
-							onChange={onTitleChange}
-						/>
-					</div>
-				</div>
+				<SearchBar
+					title="Search a serie"
+					placeholder="Which serie do you want ?"
+					onTitleChange={onTitleChange}
+				/>
+
 
 				<DirectionAwareHover data={data} />
 
