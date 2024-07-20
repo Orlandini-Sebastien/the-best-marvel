@@ -97,7 +97,7 @@ const WaterDropCards: React.FC<WaterDropCardsProps> = ({ items }) => {
 							? 'grid-cols-3 -mx-40 '
 							: row.length === 2
 							? 'grid-cols-2'
-							: 'grid-cols-1 max-xl:px-60'
+							: 'grid-cols-1 max-xl:px-60 max-sm:px-0'
 					} max-xl:grid-cols-2   max-lg:grid-cols-1`}
 				>
 					{row.map((item) => (
@@ -129,12 +129,12 @@ const WaterDropCards: React.FC<WaterDropCardsProps> = ({ items }) => {
 												onMouseLeave={() => setHoveredIndex(null)}
 											/>
 										) : (
-											<div className="w-full h-full scale-150 absolute left-72 top-40">
+											<div className="w-full h-full antialiased scale-150 absolute left-72 top-40 max-md:top-[60%] max-md:left-[75%] max-md:scale-[220%]">
 												<GlareCard className="w-full flex-col h-full justify-center items-center flex bg-red-900">
-													<div className="mt-20 antialiased font-bold w-40 text-center">
+													<div className="mt-20 max-md:text-sm max-md:mt-10 antialiased font-bold w-40 max-md:w-28 text-center">
 														{item.name}
 													</div>
-													<div className="text-xs w-40 max-h-20  text-center antialiased line-clamp-5">
+													<div className="text-xs max-md:text-sm w-40 max-h-20 max-md:w-28  text-center antialiased line-clamp-5">
 														{item.description}
 													</div>
 												</GlareCard>
