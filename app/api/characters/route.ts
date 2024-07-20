@@ -2,11 +2,21 @@ import axios from 'axios';
 import { NextResponse } from 'next/server';
 const md5 = require('md5');
 
+// Cache en mémoire
+const cache = new Map();
+
 export async function GET(req: Request) {
 	const { searchParams } = new URL(req.url);
 	const page = searchParams.get('page');
 	const name = searchParams.get('name');
 	const pageNumber = page ? parseInt(page) : 1;
+	const cacheKey = `characters-${pageNumber}-${name}`;
+
+	// Vérification du cache
+	if (cache.has(cacheKey)) {
+		return NextResponse.json(cache.get(cacheKey));
+	}
+
 	try {
 		const publicKey = process.env.NEXT_PUBLIC_API_KEY;
 		const privateKey = process.env.NEXT_PUBLIC_PRIVATE_KEY;
@@ -15,6 +25,7 @@ export async function GET(req: Request) {
 
 		let params: any = {
 			offset: (pageNumber - 1) * 20,
+			limit: 20, // Limite le nombre de résultats à 20 par page
 			apikey: publicKey,
 			ts: timestamp,
 			hash: hash,
@@ -26,16 +37,19 @@ export async function GET(req: Request) {
 		}
 
 		const response = await axios.get(
-			`http://gateway.marvel.com/v1/public/characters`,
+			`https://gateway.marvel.com/v1/public/characters`,
 			{
 				params: params,
 				headers: {
-					Accept: '*/*',
+					Accept: 'application/json',
 				},
 			}
 		);
 
 		const { data } = response;
+
+		// Stocker la réponse dans le cache
+		cache.set(cacheKey, data);
 
 		return NextResponse.json(data);
 	} catch (error) {

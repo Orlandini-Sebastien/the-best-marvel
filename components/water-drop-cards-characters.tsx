@@ -88,17 +88,17 @@ const WaterDropCards: React.FC<WaterDropCardsProps> = ({ items }) => {
 	const rows = getRows(items, isMediumScreen);
 
 	return (
-		<div className="flex   justify-center items-center flex-col mt-20">
+		<div className="grid border px-40 -ml-32 justify-center items-center flex-col mt-20">
 			{rows.map((row, rowIndex) => (
 				<div
 					key={rowIndex}
-					className={`grid gap-4  ${
+					className={`grid ${
 						row.length === 3
 							? 'grid-cols-3 -mx-40 '
 							: row.length === 2
 							? 'grid-cols-2'
-							: 'grid-cols-1'
-					} max-xl:grid-cols-2 max-xl:flex max-lg:grid-cols-1`}
+							: 'grid-cols-1 max-xl:px-60'
+					} max-xl:grid-cols-2   max-lg:grid-cols-1`}
 				>
 					{row.map((item) => (
 						<ScrollParallax key={item.id} strength={0.1 + Math.random() * 0.2}>
@@ -110,26 +110,26 @@ const WaterDropCards: React.FC<WaterDropCardsProps> = ({ items }) => {
 								<ClipPath />
 								{/* L'image */}
 								<div
-									className="absolute top-0 left-0"
+									className="absolute top-0 left-0  "
 									style={{ clipPath: 'url(#drop)' }}
 								>
-									<div className="w-[600px] h-[600px]">
+									<div className="absolute -left-20 w-[800px] h-[800px]">
 										{item.thumbnail.path !==
 										'http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available' ? (
 											<Image
-												className="object-cover p-16"
+												className="object-cover"
 												src={
 													item.thumbnail.path + '.' + item.thumbnail.extension
 												}
 												alt={item.name}
-												width={600}
+												width={800}
 												height={600}
 												onMouseMove={handleMouseMove}
 												onMouseEnter={() => setHoveredIndex(item.id)}
 												onMouseLeave={() => setHoveredIndex(null)}
 											/>
 										) : (
-											<div className="w-full h-full absolute scale-150 top-24 left-40 hover:">
+											<div className="w-full h-full scale-150 absolute left-72 top-40">
 												<GlareCard className="w-full flex-col h-full justify-center items-center flex bg-red-900">
 													<div className="mt-20 antialiased font-bold w-40 text-center">
 														{item.name}
