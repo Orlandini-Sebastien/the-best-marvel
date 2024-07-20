@@ -94,7 +94,7 @@ const CharactersPage = () => {
 			}
 		};
 		fetchData();
-	}, [page, debounceName, inputPage]);
+	}, [page, debounceName]);
 
 	return (
 		<div className="flex-center mx-auto common-padding bg-background font-comic ">
