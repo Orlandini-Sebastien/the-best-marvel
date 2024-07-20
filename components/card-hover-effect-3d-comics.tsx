@@ -18,7 +18,7 @@ export const HoverEffect = ({
 	return (
 		<div
 			className={cn(
-				'grid grid-cols-1 lg:grid-cols-2  min-[1330px]:grid-cols-3 gap-10 self-center ',
+				'grid grid-cols-1 lg:grid-cols-2  min-[1330px]:grid-cols-3 max-md:gap-0 gap-10 self-center',
 				className
 			)}
 		>
@@ -26,7 +26,7 @@ export const HoverEffect = ({
 				<Link
 					href={'comics/' + item?.id.toString()}
 					key={item?.id}
-					className="relative group block h-full w-full p-2  "
+					className="relative group block h-full w-full md:p-2 max-md:scale-75 "
 					onMouseEnter={() => setHoveredIndex(item?.id.toString())}
 					onMouseLeave={() => setHoveredIndex(null)}
 				>
@@ -75,7 +75,7 @@ export const HoverEffect = ({
 													transition={{ duration: 0.3 }}
 												>
 													<Image
-														className="object-cover w-3/4 aspect-square"
+														className="object-cover  w-11/12 max-md:w-11/12 aspect-square"
 														src={
 															item?.thumbnail?.path +
 															'.' +
@@ -102,7 +102,7 @@ export const HoverEffect = ({
 												}
 												transition={{ duration: 0.3 }}
 											>
-												<CardTitle>{item.title}</CardTitle>
+												<CardTitle className='max-md:text-xl antialiased '>{item.title}</CardTitle>
 											</motion.div>
 										</CardItem>
 									</CardBody>

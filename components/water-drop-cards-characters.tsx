@@ -88,7 +88,7 @@ const WaterDropCards: React.FC<WaterDropCardsProps> = ({ items }) => {
 	const rows = getRows(items, isMediumScreen);
 
 	return (
-		<div className="grid  px-40 -ml-32 justify-center items-center flex-col mt-20">
+		<div className="grid max-md:px-40 px-40 -ml-32 justify-center items-center flex-col mt-20">
 			{rows.map((row, rowIndex) => (
 				<div
 					key={rowIndex}
@@ -96,8 +96,8 @@ const WaterDropCards: React.FC<WaterDropCardsProps> = ({ items }) => {
 						row.length === 3
 							? 'grid-cols-3 -mx-40 '
 							: row.length === 2
-							? 'grid-cols-2'
-							: 'grid-cols-1 max-xl:px-60 max-sm:px-0'
+							? 'grid-cols-2 max-md:-mx-40 '
+							: 'grid-cols-1 max-xl:px-60 max-sm:px-0 '
 					} max-xl:grid-cols-2   max-lg:grid-cols-1`}
 				>
 					{row.map((item) => (
