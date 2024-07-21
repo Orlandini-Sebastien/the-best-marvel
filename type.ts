@@ -18,14 +18,17 @@ export interface Character {
 	};
 }
 
-export interface Story {
+export interface Creator {
 	id: number;
-	title: string;
+	firstName: string;
 	description: string;
 	thumbnail: {
 		path: string;
 		extension: string;
 	};
+	comics: Comic[];
+	series: Serie[];
+	character: Character[];
 }
 
 export interface Serie {
@@ -36,4 +39,16 @@ export interface Serie {
 		path: string;
 		extension: string;
 	};
+}
+
+export interface Event {
+	id: number;
+	title: string;
+	description: string;
+	thumbnail: {
+		path: string;
+		extension: string;
+	};
+	start: Date;
+	end: Date;
 }

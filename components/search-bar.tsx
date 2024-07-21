@@ -3,6 +3,7 @@ import React, { ChangeEventHandler } from 'react';
 import { Input } from './ui/input';
 
 interface SearchBarProps {
+	
 	title: string;
 	placeholder: string;
 	onTitleChange: ChangeEventHandler<HTMLInputElement>;

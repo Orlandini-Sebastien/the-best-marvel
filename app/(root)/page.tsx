@@ -12,10 +12,11 @@ const Home = () => {
 				<button onClick={() => router.push('/characters')}>
 					Go to the characters
 				</button>
-				<button onClick={() => router.push('/stories')}>
-					Go to the stories
+				<button onClick={() => router.push('/creators')}>
+					Go to the creators
 				</button>
 				<button onClick={() => router.push('/series')}>Go to the series</button>
+				<button onClick={() => router.push('/events')}>Go to the events</button>
 			</div>
 		</section>
 	);

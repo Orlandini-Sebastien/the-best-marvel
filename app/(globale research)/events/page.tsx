@@ -9,19 +9,20 @@ import {
 	ChangeEventHandler,
 	KeyboardEventHandler,
 } from 'react';
-import { Story } from '@/type';
+import { Event } from '@/type';
 import { ModeToggle } from '@/components/mode-toggle';
 import { useDebounce } from '@/hooks/use-debounce';
 import Heading from '@/components/heading';
 import { motion } from 'framer-motion';
 import SearchBar from '@/components/search-bar';
 import CustomPagination from '@/components/custom-pagination';
+import Link from 'next/link';
+import Image from 'next/image';
+import { LayoutGrid } from '@/components/ui/layout-grid-events';
 
-import { DirectionAwareHover } from '@/components/direction-aware-hover-series';
-
-const StoriesPage = () => {
+const EventsPage = () => {
 	// fetch data
-	const [data, setData] = useState<Story[]>([]);
+	const [data, setData] = useState<Event[]>([]);
 	const [isLoading, setIsLoading] = useState(true);
 	const [inputPage, setInputPage] = useState<string>('1');
 
@@ -77,7 +78,7 @@ const StoriesPage = () => {
 		const fetchData = async () => {
 			try {
 				const response = await axios.get(
-					`${process.env.NEXT_PUBLIC_API_URL}/stories?page=${page}&title=${debounceTitle}`
+					`${process.env.NEXT_PUBLIC_API_URL}/events?page=${page}&title=${debounceTitle}`
 				);
 				setData(response.data.data.results);
 
@@ -94,6 +95,40 @@ const StoriesPage = () => {
 		fetchData();
 	}, [page, debounceTitle]);
 
+	const Skeleton = ({ event }: { event: Event }) => {
+		return (
+			<div>
+				<p className="font-bold md:text-4xl text-xl text-white">
+					{event.title}
+				</p>
+				<p className="font-normal text-base text-white">{event.description}</p>
+				<p className="font-normal text-base my-4 max-w-lg text-neutral-200">
+					{event.start && new Date(event.start).toLocaleString()}
+				</p>
+				<p className="font-normal text-base my-4 max-w-lg text-neutral-200">
+					{event.end && new Date(event.end).toLocaleString()}
+				</p>
+			</div>
+		);
+	};
+
+	const getClassName = (index: number) => {
+		const classes = [
+			'md:col-span-2 h-[200px] ',
+			'col-span-1 h-[200px] ',
+			'col-span-1 h-[200px] ',
+			'md:col-span-2 h-[200px] ',
+		];
+		return classes[index % classes.length];
+	};
+
+	const cards = data.map((event, index) => ({
+		id: event.id,
+		content: <Skeleton key={event.id} event={event} />,
+		className: getClassName(index),
+		thumbnail: `${event.thumbnail.path}.${event.thumbnail.extension}`,
+	}));
+
 	return (
 		<section>
 			<div className="flex justify-between">
@@ -102,41 +137,26 @@ const StoriesPage = () => {
 
 			<Heading
 				title1="Mavel Univers"
-				title2="Stories"
-				title3="Catalog"
-				title4="Click a Card to Dive Deeper into Your Favorite Story!"
+				title2="Events"
+				title3="List"
+				title4="Click a Card to Dive Deeper into an Event !"
 			/>
 
 			<SearchBar
-				title="Search a Story"
-				placeholder="Which Story do you want ?"
+				title="Search an Event"
+				placeholder="Which event do you research ?"
 				onTitleChange={onTitleChange}
 			/>
 
-			<div className="grid grid-cols-1 md:grid-cols-2  lg:grid-cols-3 gap-4">
-				{data.map((story) => (
-					<section key={story.id} className="border p-4 ">
-						<div>{story.title}</div>
-						<div>{story.description}</div>
-					</section>
-				))}
+			<div className="h-screen py-20 w-full">
+				{isLoading ? <div>Loading...</div> : <LayoutGrid cards={cards} />}
 			</div>
 
 			{isLoading && (
 				<motion.div
-					initial={{
-						opacity: 0,
-						y: 20,
-					}}
-					animate={{
-						opacity: 1,
-						y: [20, -5, 0],
-					}}
-					transition={{
-						delay: 0.5,
-						duration: 0.5,
-						ease: [0.4, 0.0, 0.2, 1],
-					}}
+					initial={{ opacity: 0, y: 20 }}
+					animate={{ opacity: 1, y: [20, -5, 0] }}
+					transition={{ delay: 0.5, duration: 0.5, ease: [0.4, 0.0, 0.2, 1] }}
 					className="text-foreground flex justify-center items-center h-1/2 w-full"
 				>
 					is Loading...
@@ -153,28 +173,8 @@ const StoriesPage = () => {
 				page={page}
 				totalPages={totalPages}
 			/>
-			{isLoading && (
-				<motion.div
-					initial={{
-						opacity: 0,
-						y: 20,
-					}}
-					animate={{
-						opacity: 1,
-						y: [20, -5, 0],
-					}}
-					transition={{
-						delay: 0.5,
-						duration: 0.5,
-						ease: [0.4, 0.0, 0.2, 1],
-					}}
-					className="text-foreground flex justify-center items-center h-1/2 w-full"
-				>
-					is Loading...
-				</motion.div>
-			)}
 		</section>
 	);
 };
 
-export default StoriesPage;
+export default EventsPage;

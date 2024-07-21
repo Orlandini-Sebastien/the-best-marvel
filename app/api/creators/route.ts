@@ -8,9 +8,9 @@ const cache = new Map();
 export async function GET(req: Request) {
 	const { searchParams } = new URL(req.url);
 	const page = searchParams.get('page');
-	const title = searchParams.get('title');
+	const firstName = searchParams.get('firstName');
 	const pageNumber = page ? parseInt(page) : 1;
-	const cacheKey = `stories-${pageNumber}-${title}`;
+	const cacheKey = `creators-${pageNumber}-${firstName}`;
 
 	// Vérification du cache
 	if (cache.has(cacheKey)) {
@@ -32,12 +32,12 @@ export async function GET(req: Request) {
 		};
 
 		// Ajouter le titre aux paramètres uniquement s'il n'est pas vide
-		if (title && title !== '') {
-			params.nameStartsWith = title;
+		if (firstName && firstName !== '') {
+			params.firstName = firstName;
 		}
 
 		const response = await axios.get(
-			`https://gateway.marvel.com/v1/public/stories`,
+			`https://gateway.marvel.com/v1/public/creators`,
 			{
 				params: params,
 				headers: {
