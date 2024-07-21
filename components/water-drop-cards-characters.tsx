@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import {
 	motion,
@@ -23,6 +23,8 @@ interface WaterDropCardsProps {
 }
 
 const WaterDropCards: React.FC<WaterDropCardsProps> = ({ items }) => {
+	const [scrollY, setScrollY] = useState(0);
+
 	const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 	const springConfig = { stiffness: 100, damping: 5 };
 	const x = useMotionValue(0);
@@ -40,6 +42,46 @@ const WaterDropCards: React.FC<WaterDropCardsProps> = ({ items }) => {
 		x.set(event.nativeEvent.offsetX - halfWidth);
 	};
 
+	useEffect(() => {
+		const handleScroll = () => {
+			setScrollY(window.scrollY);
+		};
+
+		window.addEventListener('scroll', handleScroll);
+		return () => {
+			window.removeEventListener('scroll', handleScroll);
+		};
+	}, []);
+
+	const springConfig2 = { stiffness: 100, damping: 5 };
+	const x2 = useMotionValue(0);
+	const rotate2 = useSpring(
+		useTransform(x, [-100, 100], [-45, 45]),
+		springConfig
+	);
+	const translateX2 = useSpring(
+		useTransform(x, [-100, 100], [-50, 50]),
+		springConfig
+	);
+
+	const oscillation = {
+		initial: { opacity: 1, x: 0, scale: 1 },
+		animate: () => ({
+			opacity: 1,
+			x: [-20, 20, -20], // Oscillation de gauche à droite
+			scale: 1,
+			transition: {
+				type: 'spring',
+				stiffness: 260,
+				damping: 10,
+				repeat: Infinity,
+				repeatType: 'reverse' as const,
+				duration: 0.5,
+				delay: 0.1,
+			},
+		}),
+	};
+
 	return (
 		<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2 justify-items-center pt-40 pb-40 overflow-hidden">
 			{items.map((item) => (
@@ -53,6 +95,19 @@ const WaterDropCards: React.FC<WaterDropCardsProps> = ({ items }) => {
 							<GradienBorderSVG />
 							<ClipPath />
 							{/* La div contenant l'image ou le GlareCard */}
+
+							{item.thumbnail.path !==
+								'http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available' && (
+								<div className="max-md:flex absolute right-32 top-20 opacity-70 w-full max-w-xs hidden flex-col items-center justify-center rounded-md bg-primary-foreground z-50 shadow-xl px-4 py-2">
+									<div className="font-bold text-primary text-lg">
+										{item.name}
+									</div>
+									<div className="text-primary text-sm overflow-hidden break-words line-clamp-4">
+										{item.description}
+									</div>
+								</div>
+							)}
+
 							<div className="absolute  w-[600px] h-[600px]">
 								<div
 									className="absolute inset-0"
@@ -92,32 +147,34 @@ const WaterDropCards: React.FC<WaterDropCardsProps> = ({ items }) => {
 
 						<AnimatePresence>
 							{hoveredIndex === item.id && (
-								<motion.div
-									initial={{ opacity: 0, y: 20, scale: 0.6 }}
-									animate={{
-										opacity: 1,
-										y: 0,
-										scale: 1,
-										transition: {
-											type: 'spring',
-											stiffness: 260,
-											damping: 10,
-										},
-									}}
-									exit={{ opacity: 0, y: 20, scale: 0.6 }}
-									style={{
-										translateX: translateX,
-										rotate: rotate,
-									}}
-									className="absolute right-32 top-4 w-full max-w-xs flex flex-col items-center justify-center rounded-md bg-primary-foreground z-50 shadow-xl px-4 py-2"
-								>
-									<div className="font-bold text-primary text-lg">
-										{item.name}
-									</div>
-									<div className="text-primary text-sm overflow-hidden break-words line-clamp-4">
-										{item.description}
-									</div>
-								</motion.div>
+								<>
+									<motion.div
+										initial={{ opacity: 0, y: 20, scale: 0.6 }}
+										animate={{
+											opacity: 1,
+											y: 0,
+											scale: 1,
+											transition: {
+												type: 'spring',
+												stiffness: 260,
+												damping: 10,
+											},
+										}}
+										exit={{ opacity: 0, y: 20, scale: 0.6 }}
+										style={{
+											translateX: translateX,
+											rotate: rotate,
+										}}
+										className="max-md:hidden absolute right-32 top-4 w-full max-w-xs flex flex-col items-center justify-center rounded-md bg-primary-foreground z-50 shadow-xl px-4 py-2"
+									>
+										<div className="font-bold text-primary text-lg">
+											{item.name}
+										</div>
+										<div className="text-primary text-sm overflow-hidden break-words line-clamp-4">
+											{item.description}
+										</div>
+									</motion.div>
+								</>
 							)}
 						</AnimatePresence>
 					</ScrollParallax>
