@@ -40,150 +40,88 @@ const WaterDropCards: React.FC<WaterDropCardsProps> = ({ items }) => {
 		x.set(event.nativeEvent.offsetX - halfWidth);
 	};
 
-	// Fonction pour diviser les éléments en lignes de 3, 2, et 1 colonnes selon la taille de l'écran
-	const getRows = (items: Character[], isMediumScreen: boolean) => {
-		const rows: Character[][] = [];
-		let i = 0;
-		while (i < items.length) {
-			if (isMediumScreen) {
-				if (i % 3 < 2) {
-					// Ajouter une ligne de 2 éléments
-					rows.push(items.slice(i, i + 2));
-					i += 2;
-				} else {
-					// Ajouter une ligne de 1 élément
-					rows.push(items.slice(i, i + 1));
-					i += 1;
-				}
-			} else {
-				if (i % 5 < 3) {
-					// Ajouter une ligne de 3 éléments
-					rows.push(items.slice(i, i + 3));
-					i += 3;
-				} else {
-					// Ajouter une ligne de 2 éléments
-					rows.push(items.slice(i, i + 2));
-					i += 2;
-				}
-			}
-		}
-		return rows;
-	};
-
-	const [isMediumScreen, setIsMediumScreen] = useState(false);
-
-	// Détecter la taille de l'écran pour changer la disposition
-	React.useEffect(() => {
-		const handleResize = () => {
-			setIsMediumScreen(window.innerWidth >= 768 && window.innerWidth < 1280);
-		};
-
-		handleResize(); // Vérifiez une fois au montage
-		window.addEventListener('resize', handleResize);
-		return () => {
-			window.removeEventListener('resize', handleResize);
-		};
-	}, []);
-
-	const rows = getRows(items, isMediumScreen);
-
 	return (
-		<div className="grid max-md:px-48 px-40  -ml-32 justify-center items-center flex-col mt-20 max-md:scale-75 max-md:-mt-[1400px] max-md:-mb-[1700px]">
-			{rows.map((row, rowIndex) => (
-				<div
-					key={rowIndex}
-					className={`grid ${
-						row.length === 3
-							? 'grid-cols-3 -mx-40 '
-							: row.length === 2
-							? 'grid-cols-2 max-md:-mx-40 '
-							: 'grid-cols-1 max-xl:px-60 max-sm:px-0 '
-					} max-xl:grid-cols-2   max-lg:grid-cols-1`}
+		<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2 justify-items-center pt-40 pb-40 overflow-hidden">
+			{items.map((item) => (
+				<Link
+					href={'characters/' + item?.id.toString()}
+					key={item.id}
+					className="relative w-[600px] h-[600px] group"
 				>
-					{row.map((item) => (
-						<ScrollParallax key={item.id} strength={0.1 + Math.random() * 0.2}>
-							{/* Image avec clipPath et avec une bordure SVG */}
-							<Link
-								href={'characters/' + item?.id.toString()}
-								className="relative w-[600px] group flex justify-center items-center"
-							>
-								<ClipPath />
-								{/* L'image */}
+					<ScrollParallax strength={0.1 + Math.random() * 0.2}>
+						<div className="relative w-[600px] h-[600px] top-0 left-0 flex justify-center items-center -z-30 max-md:scale-75 ">
+							<GradienBorderSVG />
+							<ClipPath />
+							{/* La div contenant l'image ou le GlareCard */}
+							<div className="absolute  w-[600px] h-[600px]">
 								<div
-									className="absolute top-0 left-0  "
+									className="absolute inset-0"
 									style={{ clipPath: 'url(#drop)' }}
 								>
-									<div className="absolute -left-20 w-[800px] h-[800px]">
-										{item.thumbnail.path !==
-										'http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available' ? (
-											<Image
-												className="object-cover"
-												src={
-													item.thumbnail.path + '.' + item.thumbnail.extension
-												}
-												alt={item.name}
-												width={800}
-												height={600}
-												onMouseMove={handleMouseMove}
-												onMouseEnter={() => setHoveredIndex(item.id)}
-												onMouseLeave={() => setHoveredIndex(null)}
-											/>
-										) : (
-											<div className="w-full h-full antialiased scale-150 absolute left-72 top-40 max-md:top-[60%] max-md:left-[75%] max-md:scale-[220%]">
-												<GlareCard className="w-full flex-col h-full justify-center items-center flex bg-red-900">
-													<div className="mt-20 max-md:text-sm max-md:mt-10 antialiased font-bold w-40 max-md:w-28 text-center">
-														{item.name}
-													</div>
-													<div className="text-xs max-md:text-sm w-40 max-h-20 max-md:w-28  text-center antialiased line-clamp-5">
-														{item.description}
-													</div>
-												</GlareCard>
-											</div>
-										)}
-									</div>
-								</div>
-								{/* La bordure */}
-								<div className="w-[600px]">
-									<GradienBorderSVG />
-								</div>
-								<div className="w-[600px] absolute top-0 left-0 -z-10">
-									<BackgroundLight />
-								</div>
-
-								<AnimatePresence>
-									{hoveredIndex === item.id && (
-										<motion.div
-											initial={{ opacity: 0, y: 20, scale: 0.6 }}
-											animate={{
-												opacity: 1,
-												y: 0,
-												scale: 1,
-												transition: {
-													type: 'spring',
-													stiffness: 260,
-													damping: 10,
-												},
-											}}
-											exit={{ opacity: 0, y: 20, scale: 0.6 }}
-											style={{
-												translateX: translateX,
-												rotate: rotate,
-											}}
-											className="absolute -top-10 w-96 flex flex-col items-center justify-center rounded-md bg-primary-foreground z-50 shadow-xl px-4 py-2"
-										>
-											<div className="font-bold text-primary h3">
-												{item.name}
-											</div>
-											<div className="text-primary h6 overflow-hidden break-words line-clamp-4">
-												{item.description}
-											</div>
-										</motion.div>
+									{item.thumbnail.path !==
+									'http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available' ? (
+										<Image
+											className="absolute inset-0 object-cover w-full h-full"
+											src={item.thumbnail.path + '.' + item.thumbnail.extension}
+											alt={item.name}
+											layout="fill"
+											onMouseMove={handleMouseMove}
+											onMouseEnter={() => setHoveredIndex(item.id)}
+											onMouseLeave={() => setHoveredIndex(null)}
+										/>
+									) : (
+										<div className="absolute inset-0 flex justify-center items-center max-md:scale-[200%] scale-150 antialiased">
+											<GlareCard className="flex flex-col justify-center items-center bg-red-900 w-full h-full">
+												<div className="text-center w-1/2 font-bold">
+													{item.name}
+												</div>
+												<div className="text-center w-1/2 text-xs line-clamp-5">
+													{item.description}
+												</div>
+											</GlareCard>
+										</div>
 									)}
-								</AnimatePresence>
-							</Link>
-						</ScrollParallax>
-					))}
-				</div>
+								</div>
+							</div>
+						</div>
+						{Number(item.id) % 2 === 0 && (
+							<div className="absolute max-md:w-[300px] max-md:h-[300px]  w-[400px] h-[400px] top-10  left-20 -z-40 flex justify-center items-center">
+								<BackgroundLight />
+							</div>
+						)}
+
+						<AnimatePresence>
+							{hoveredIndex === item.id && (
+								<motion.div
+									initial={{ opacity: 0, y: 20, scale: 0.6 }}
+									animate={{
+										opacity: 1,
+										y: 0,
+										scale: 1,
+										transition: {
+											type: 'spring',
+											stiffness: 260,
+											damping: 10,
+										},
+									}}
+									exit={{ opacity: 0, y: 20, scale: 0.6 }}
+									style={{
+										translateX: translateX,
+										rotate: rotate,
+									}}
+									className="absolute right-32 top-4 w-full max-w-xs flex flex-col items-center justify-center rounded-md bg-primary-foreground z-50 shadow-xl px-4 py-2"
+								>
+									<div className="font-bold text-primary text-lg">
+										{item.name}
+									</div>
+									<div className="text-primary text-sm overflow-hidden break-words line-clamp-4">
+										{item.description}
+									</div>
+								</motion.div>
+							)}
+						</AnimatePresence>
+					</ScrollParallax>
+				</Link>
 			))}
 		</div>
 	);

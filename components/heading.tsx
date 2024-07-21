@@ -35,11 +35,11 @@ const Heading: React.FC<HeadingProps> = ({
 						duration: 0.5,
 						ease: [0.4, 0.0, 0.2, 1],
 					}}
-					className="px-4 h2 md:h1 font-bold text-neutral-700 dark:text-white max-w-4xl leading-relaxed lg:leading-snug text-center mx-auto "
+					className="px-4 h2 md:h1 font-bold text-neutral-700 dark:text-white max-w-4xl leading-relaxed lg:leading-snug text-center mx-auto w-9/12 "
 				>
-					{title1}
+					{title1} {' '}
 					<Highlight className="text-primary">{title2}</Highlight>
-					{title3}{' '}
+					{' '} {title3}{' '}
 					<TextGenerateEffect
 						words={title4}
 						className="h4 text-neutral-700/80 dark:text-white/80"

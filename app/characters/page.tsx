@@ -97,8 +97,9 @@ const CharactersPage = () => {
 	}, [page, debounceName]);
 
 	return (
-		<div className="flex-center mx-auto common-padding bg-background font-comic overflow-clip">
-			<div className="w-full max-w-[1400px] flex flex-col dark:bg-dot-red-100/[0.2] bg-dot-red-800/[0.2]">
+		<div className="flex-center mx-auto common-padding bg-background font-comic ">
+			<div className="w-full max-w-[1400px] dark:bg-dot-red-100/[0.2] bg-dot-red-800/[0.2] ">
+
 				<div className="flex justify-between">
 					<ModeToggle />
 				</div>
