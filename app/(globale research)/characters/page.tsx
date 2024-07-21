@@ -97,81 +97,78 @@ const CharactersPage = () => {
 	}, [page, debounceName]);
 
 	return (
-		<div className="flex-center mx-auto common-padding bg-background font-comic ">
-			<div className="w-full max-w-[1400px] dark:bg-dot-red-100/[0.2] bg-dot-red-800/[0.2] ">
-
-				<div className="flex justify-between">
-					<ModeToggle />
-				</div>
-
-				<Heading
-					title1="Mavel Univers"
-					title2="Characters"
-					title3="Catalog"
-					title4="Click a Card to Dive Deeper into Your Favorite Character!"
-				/>
-
-				<SearchBar
-					title="Search a character"
-					placeholder="Which character do you want?"
-					onTitleChange={onNameChange}
-				/>
-
-				{isLoading && (
-					<motion.div
-						initial={{
-							opacity: 0,
-							y: 20,
-						}}
-						animate={{
-							opacity: 1,
-							y: [20, -5, 0],
-						}}
-						transition={{
-							delay: 0.5,
-							duration: 0.5,
-							ease: [0.4, 0.0, 0.2, 1],
-						}}
-						className="text-foreground flex justify-center items-center h-1/2 w-full"
-					>
-						is Loading...
-					</motion.div>
-				)}
-
-				<WaterDropCards items={data} />
-
-				<CustomPagination
-					handleInputChange={handleInputChange}
-					handleKeyDown={handleKeyDown}
-					handleNext={handleNext}
-					handlePrevious={handlePrevious}
-					handleInputSubmit={handleInputSubmit}
-					page={page}
-					totalPages={totalPages}
-					updatePage={updatePage}
-				/>
-				{isLoading && (
-					<motion.div
-						initial={{
-							opacity: 0,
-							y: 20,
-						}}
-						animate={{
-							opacity: 1,
-							y: [20, -5, 0],
-						}}
-						transition={{
-							delay: 0.5,
-							duration: 0.5,
-							ease: [0.4, 0.0, 0.2, 1],
-						}}
-						className="text-foreground flex justify-center items-center h-1/2 w-full"
-					>
-						is Loading...
-					</motion.div>
-				)}
+		<section>
+			<div className="flex justify-between">
+				<ModeToggle />
 			</div>
-		</div>
+
+			<Heading
+				title1="Mavel Univers"
+				title2="Characters"
+				title3="Catalog"
+				title4="Click a Card to Dive Deeper into Your Favorite Character!"
+			/>
+
+			<SearchBar
+				title="Search a character"
+				placeholder="Which character do you want?"
+				onTitleChange={onNameChange}
+			/>
+
+			{isLoading && (
+				<motion.div
+					initial={{
+						opacity: 0,
+						y: 20,
+					}}
+					animate={{
+						opacity: 1,
+						y: [20, -5, 0],
+					}}
+					transition={{
+						delay: 0.5,
+						duration: 0.5,
+						ease: [0.4, 0.0, 0.2, 1],
+					}}
+					className="text-foreground flex justify-center items-center h-1/2 w-full"
+				>
+					is Loading...
+				</motion.div>
+			)}
+
+			<WaterDropCards items={data} />
+
+			<CustomPagination
+				handleInputChange={handleInputChange}
+				handleKeyDown={handleKeyDown}
+				handleNext={handleNext}
+				handlePrevious={handlePrevious}
+				handleInputSubmit={handleInputSubmit}
+				page={page}
+				totalPages={totalPages}
+				updatePage={updatePage}
+			/>
+			{isLoading && (
+				<motion.div
+					initial={{
+						opacity: 0,
+						y: 20,
+					}}
+					animate={{
+						opacity: 1,
+						y: [20, -5, 0],
+					}}
+					transition={{
+						delay: 0.5,
+						duration: 0.5,
+						ease: [0.4, 0.0, 0.2, 1],
+					}}
+					className="text-foreground flex justify-center items-center h-1/2 w-full"
+				>
+					is Loading...
+				</motion.div>
+			)}
+		</section>
 	);
 };
 

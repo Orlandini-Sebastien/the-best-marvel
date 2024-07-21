@@ -96,60 +96,54 @@ const ComicsPage = () => {
 	}, [page, debounceTitle]);
 
 	return (
-		<div className="flex-center mx-auto common-padding bg-background font-comic ">
-			<div className="w-full max-w-[1400px] flex flex-col items-center justify-center dark:bg-dot-red-100/[0.2] bg-dot-red-800/[0.2]">
-				<div className="flex justify-between">
-					<ModeToggle />
-				</div>
-
-				<Heading
-					title1="Mavel Univers"
-					title2="Comics"
-					title3="Catalog"
-					title4="Click a Card to Dive Deeper into Your Favorite Comic!"
-				/>
-
-				<SearchBar
-					title="Search a comic"
-					placeholder="What comic do you want ?"
-					onTitleChange={onTitleChange}
-				/>
-
-				{isLoading && (
-					<motion.div
-						initial={{
-							opacity: 0,
-							y: 20,
-						}}
-						animate={{
-							opacity: 1,
-							y: [20, -5, 0],
-						}}
-						transition={{
-							delay: 0.5,
-							duration: 0.5,
-							ease: [0.4, 0.0, 0.2, 1],
-						}}
-						className="text-foreground flex justify-center items-center h-1/2 w-full"
-					>
-						is Loading...
-					</motion.div>
-				)}
-
-				<HoverEffect items={data} />
-
-				<CustomPagination
-					handleInputChange={handleInputChange}
-					handleKeyDown={handleKeyDown}
-					handleInputSubmit={handleInputSubmit}
-					updatePage={updatePage}
-					handleNext={handleNext}
-					handlePrevious={handlePrevious}
-					page={page}
-					totalPages={totalPages}
-				/>
+		<section>
+			{' '}
+			<div className="flex justify-between">
+				<ModeToggle />
 			</div>
-		</div>
+			<Heading
+				title1="Mavel Univers"
+				title2="Comics"
+				title3="Catalog"
+				title4="Click a Card to Dive Deeper into Your Favorite Comic!"
+			/>
+			<SearchBar
+				title="Search a comic"
+				placeholder="What comic do you want ?"
+				onTitleChange={onTitleChange}
+			/>
+			{isLoading && (
+				<motion.div
+					initial={{
+						opacity: 0,
+						y: 20,
+					}}
+					animate={{
+						opacity: 1,
+						y: [20, -5, 0],
+					}}
+					transition={{
+						delay: 0.5,
+						duration: 0.5,
+						ease: [0.4, 0.0, 0.2, 1],
+					}}
+					className="text-foreground flex justify-center items-center h-1/2 w-full"
+				>
+					is Loading...
+				</motion.div>
+			)}
+			<HoverEffect items={data} />
+			<CustomPagination
+				handleInputChange={handleInputChange}
+				handleKeyDown={handleKeyDown}
+				handleInputSubmit={handleInputSubmit}
+				updatePage={updatePage}
+				handleNext={handleNext}
+				handlePrevious={handlePrevious}
+				page={page}
+				totalPages={totalPages}
+			/>
+		</section>
 	);
 };
 
