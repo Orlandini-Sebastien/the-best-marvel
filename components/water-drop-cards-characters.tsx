@@ -98,7 +98,7 @@ const WaterDropCards: React.FC<WaterDropCardsProps> = ({ items }) => {
 
 							{item.thumbnail.path !==
 								'http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available' && (
-								<div className="max-md:flex absolute right-32 top-20 opacity-70 w-full max-w-xs hidden flex-col items-center justify-center rounded-md bg-primary-foreground z-50 shadow-xl px-4 py-2">
+								<div className="max-md:flex absolute right-1/5 top-20 opacity-70 w-full max-w-xs hidden flex-col items-center justify-center rounded-md bg-primary-foreground z-50 shadow-xl px-4 py-2">
 									<div className="font-bold text-primary text-lg">
 										{item.name}
 									</div>

@@ -18,7 +18,7 @@ export const HoverEffect = ({
 	return (
 		<div
 			className={cn(
-				'grid grid-cols-1 lg:grid-cols-2  min-[1330px]:grid-cols-3 max-md:gap-0 gap-10 self-center',
+				'grid grid-cols-1 lg:grid-cols-2  min-[1330px]:grid-cols-3  gap-10',
 				className
 			)}
 		>
@@ -26,7 +26,7 @@ export const HoverEffect = ({
 				<Link
 					href={'comics/' + item?.id.toString()}
 					key={item?.id}
-					className="relative group block h-full w-full md:p-2 max-md:scale-75 "
+					className="relative group block h-full w-full md:p-2  max-md:w-1/3 max-md:h-1/3 max-md:mx-auto  "
 					onMouseEnter={() => setHoveredIndex(item?.id.toString())}
 					onMouseLeave={() => setHoveredIndex(null)}
 				>
@@ -74,17 +74,20 @@ export const HoverEffect = ({
 													}
 													transition={{ duration: 0.3 }}
 												>
-													<Image
-														className="object-cover  w-11/12 max-md:w-11/12 aspect-square"
-														src={
-															item?.thumbnail?.path +
-															'.' +
-															item?.thumbnail?.extension
-														}
-														width={300}
-														height={300}
-														alt="image"
-													/>
+													{item.thumbnail.path !==
+														'http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available' && (
+														<Image
+															className="object-cover w-5/6 aspect-square"
+															src={
+																item?.thumbnail?.path +
+																'.' +
+																item?.thumbnail?.extension
+															}
+															width={300}
+															height={300}
+															alt="image"
+														/>
+													)}
 												</motion.div>
 											</CardItem>
 										)}
@@ -102,7 +105,9 @@ export const HoverEffect = ({
 												}
 												transition={{ duration: 0.3 }}
 											>
-												<CardTitle className='max-md:text-xl antialiased '>{item.title}</CardTitle>
+												<CardTitle className=" antialiased max-md:text-xl md:text-xl ">
+													{item.title}
+												</CardTitle>
 											</motion.div>
 										</CardItem>
 									</CardBody>
