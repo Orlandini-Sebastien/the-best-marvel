@@ -41,14 +41,14 @@ export const LayoutGrid = ({ cards }: { cards: Card[] }) => {
 							selected?.id === card.id
 								? ` ${
 										i < 4
-											? 'top40'
+											? 'md:top40  max-md:h-1/3'
 											: i < 8
-											? 'top80'
+											? 'md:top80 max-md:h-1/3'
 											: i < 12
-											? 'top120'
+											? 'md:top120 max-md:h-1/3'
 											: i < 16
-											? 'top160'
-											: 'top200'
+											? 'md:top160 max-md:h-1/3'
+											: 'md:top200 max-md:h-1/3'
 								  }  rounded-lg cursor-pointer absolute left-0 right-0  h-1/2 w-full md:w-1/2 m-auto z-50 flex justify-center items-center flex-wrap flex-col`
 								: lastSelected?.id === card.id
 								? 'z-40 bg-white rounded-xl h-full w-full'
@@ -65,7 +65,7 @@ export const LayoutGrid = ({ cards }: { cards: Card[] }) => {
 				onClick={handleOutsideClick}
 				className={cn(
 					'absolute h-full w-full left-0 top-0 opacity-0 z-10 ',
-					selected?.id && 'pointer-events-none'
+					selected?.id ? 'pointer-events-auto' : 'pointer-events-none'
 				)}
 				animate={{ opacity: selected?.id ? 0.3 : 0 }}
 			/>

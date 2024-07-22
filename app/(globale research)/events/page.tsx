@@ -16,7 +16,7 @@ import Heading from '@/components/heading';
 import { motion } from 'framer-motion';
 import SearchBar from '@/components/search-bar';
 import CustomPagination from '@/components/custom-pagination';
-import { LayoutGrid } from '@/components/ui/layout-grid-events';
+import { LayoutGrid } from '@/components/layout-grid-events';
 
 const EventsPage = () => {
 	// fetch data
@@ -147,10 +147,15 @@ const EventsPage = () => {
 				onTitleChange={onTitleChange}
 			/>
 
-			<div className="h-screen py-20 w-full">
-				{isLoading ? <div>Loading...</div> : <LayoutGrid cards={cards} />}
-			</div>
-			<div className="h-[1200px]" />
+			{isLoading ? (
+				<div>Loading...</div>
+			) : (
+				<div className="h-screen py-20 w-full">
+					<LayoutGrid cards={cards} />
+				</div>
+			)}
+
+			{!isLoading && <div className="h-[1200px] max-md:h-[3400px]" />}
 
 			{isLoading && (
 				<motion.div
