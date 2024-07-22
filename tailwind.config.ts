@@ -23,6 +23,7 @@ function addVariablesForColors({ addBase, theme }: any) {
 
 const config = {
   darkMode: ["class"],
+  
   content: [
     './pages/**/*.{ts,tsx}',
     './components/**/*.{ts,tsx}',
@@ -39,6 +40,7 @@ const config = {
       },
     },
     extend: {
+     
       fontFamily : {
        comic : "var(--font-comic)"
       },

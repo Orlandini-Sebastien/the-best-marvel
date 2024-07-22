@@ -26,17 +26,30 @@ export const LayoutGrid = ({ cards }: { cards: Card[] }) => {
 		setSelected(null);
 	};
 
+	let top: string;
+
 	return (
 		<div className="w-full h-full p-10 grid grid-cols-1 md:grid-cols-3  max-w-7xl mx-auto gap-4 relative">
 			{cards.map((card, i) => (
 				<div key={i} className={cn(card.className, '')}>
+					{}
 					<motion.div
 						onClick={() => handleClick(card)}
 						className={cn(
 							card.className,
 							'relative overflow-hidden',
 							selected?.id === card.id
-								? 'rounded-lg cursor-pointer absolute inset-0 h-1/2 w-full md:w-1/2 m-auto z-50 flex justify-center items-center flex-wrap flex-col'
+								? ` ${
+										i < 4
+											? 'top40'
+											: i < 8
+											? 'top80'
+											: i < 12
+											? 'top120'
+											: i < 16
+											? 'top160'
+											: 'top200'
+								  }  rounded-lg cursor-pointer absolute left-0 right-0  h-1/2 w-full md:w-1/2 m-auto z-50 flex justify-center items-center flex-wrap flex-col`
 								: lastSelected?.id === card.id
 								? 'z-40 bg-white rounded-xl h-full w-full'
 								: 'bg-white rounded-xl h-full w-full'
@@ -51,8 +64,8 @@ export const LayoutGrid = ({ cards }: { cards: Card[] }) => {
 			<motion.div
 				onClick={handleOutsideClick}
 				className={cn(
-					'absolute h-full w-full left-0 top-0 bg-black opacity-0 z-10',
-					selected?.id ? 'pointer-events-auto' : 'pointer-events-none'
+					'absolute h-full w-full left-0 top-0 opacity-0 z-10 ',
+					selected?.id && 'pointer-events-none'
 				)}
 				animate={{ opacity: selected?.id ? 0.3 : 0 }}
 			/>

@@ -16,8 +16,6 @@ import Heading from '@/components/heading';
 import { motion } from 'framer-motion';
 import SearchBar from '@/components/search-bar';
 import CustomPagination from '@/components/custom-pagination';
-import Link from 'next/link';
-import Image from 'next/image';
 import { LayoutGrid } from '@/components/ui/layout-grid-events';
 
 const EventsPage = () => {
@@ -123,6 +121,7 @@ const EventsPage = () => {
 	};
 
 	const cards = data.map((event, index) => ({
+		index: index,
 		id: event.id,
 		content: <Skeleton key={event.id} event={event} />,
 		className: getClassName(index),
@@ -151,6 +150,7 @@ const EventsPage = () => {
 			<div className="h-screen py-20 w-full">
 				{isLoading ? <div>Loading...</div> : <LayoutGrid cards={cards} />}
 			</div>
+			<div className="h-[1200px]" />
 
 			{isLoading && (
 				<motion.div

@@ -99,6 +99,21 @@
 	.h6 {
 		@apply font-semibold text-base max-md:text-xs leading-8;
 	}
+	.top40 {
+		top: 5px;
+	}
+	.top80 {
+		top: 435px;
+	}
+	.top120 {
+		top: 865px;
+	}
+	.top160 {
+		top: 1295px;
+	}
+	.top200 {
+		top: 1735px;
+	}
 }
 
 .radial-light {

@@ -4,13 +4,13 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
 import { CardContainer, CardBody, CardItem } from './ui/3d-card';
-import { Comic, Serie, Story } from '@/type';
+import { Comic, Serie } from '@/type';
 
 export const HoverEffect = ({
 	items,
 	className,
 }: {
-	items: (Comic | Story | Serie)[];
+	items: (Comic | Serie)[];
 	className?: string;
 }) => {
 	let [hoveredIndex, setHoveredIndex] = useState<string | null>(null);
