@@ -155,7 +155,7 @@ const EventsPage = () => {
 				</div>
 			)}
 
-			{!isLoading && <div className="h-[1200px] max-md:h-[3400px]" />}
+			{!isLoading && <div className="h-[1500px] max-md:h-[3700px]" />}
 
 			{isLoading && (
 				<motion.div

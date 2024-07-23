@@ -20,7 +20,7 @@ export async function GET(req: Request) {
 	try {
 		const publicKey = process.env.NEXT_PUBLIC_API_KEY;
 		const privateKey = process.env.NEXT_PUBLIC_PRIVATE_KEY;
-		const timestamp = '1';
+		const timestamp = '2';
 		const hash = md5(timestamp + privateKey + publicKey);
 
 		let params: any = {
