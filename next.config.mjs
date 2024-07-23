@@ -1,9 +1,22 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
 	images: {
-		domains: ['i.annihil.us'],
+	  domains: ['i.annihil.us'],
 	},
-	headers: [{ key: 'Keep-Alive', value: 'timeout=600' }],
-};
-
-export default nextConfig;
+	async headers() {
+	  return [
+		{
+		  source: "/api/(.*)",
+		  headers: [
+			{
+			  key: "Keep-Alive",
+			  value: "timeout=600", // 10 minutes
+			},
+		  ],
+		},
+	  ];
+	},
+  };
+  
+  export default nextConfig;
+  
