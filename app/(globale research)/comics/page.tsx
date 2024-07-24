@@ -10,15 +10,14 @@ import {
 	KeyboardEventHandler,
 } from 'react';
 
-import { motion } from 'framer-motion';
 import { Comic } from '@/type';
 import { HoverEffect } from '@/components/card-hover-effect-3d-comics';
-import { ModeToggle } from '@/components/mode-toggle';
 
 import { useDebounce } from '@/hooks/use-debounce';
 import Heading from '@/components/heading';
 import SearchBar from '@/components/search-bar';
 import CustomPagination from '@/components/custom-pagination';
+import IsLoading from '@/components/isLoading';
 
 const ComicsPage = () => {
 	// fetch data
@@ -108,26 +107,7 @@ const ComicsPage = () => {
 				placeholder="What comic do you want ?"
 				onTitleChange={onTitleChange}
 			/>
-			{isLoading && (
-				<motion.div
-					initial={{
-						opacity: 0,
-						y: 20,
-					}}
-					animate={{
-						opacity: 1,
-						y: [20, -5, 0],
-					}}
-					transition={{
-						delay: 0.5,
-						duration: 0.5,
-						ease: [0.4, 0.0, 0.2, 1],
-					}}
-					className="text-foreground flex justify-center items-center h-1/2 w-full"
-				>
-					is Loading...
-				</motion.div>
-			)}
+			{isLoading && <IsLoading />}
 			<HoverEffect items={data} />
 			<CustomPagination
 				handleInputChange={handleInputChange}

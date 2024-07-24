@@ -10,14 +10,13 @@ import {
 	KeyboardEventHandler,
 } from 'react';
 import { Creator } from '@/type';
-import { ModeToggle } from '@/components/mode-toggle';
 import { useDebounce } from '@/hooks/use-debounce';
 import Heading from '@/components/heading';
-import { motion } from 'framer-motion';
 import SearchBar from '@/components/search-bar';
 import CustomPagination from '@/components/custom-pagination';
 import Link from 'next/link';
 import Image from 'next/image';
+import IsLoading from '@/components/isLoading';
 
 const CreatorsPage = () => {
 	// fetch data
@@ -127,26 +126,7 @@ const CreatorsPage = () => {
 				))}
 			</div>
 
-			{isLoading && (
-				<motion.div
-					initial={{
-						opacity: 0,
-						y: 20,
-					}}
-					animate={{
-						opacity: 1,
-						y: [20, -5, 0],
-					}}
-					transition={{
-						delay: 0.5,
-						duration: 0.5,
-						ease: [0.4, 0.0, 0.2, 1],
-					}}
-					className="text-foreground flex justify-center items-center h-1/2 w-full"
-				>
-					is Loading...
-				</motion.div>
-			)}
+			{isLoading && <IsLoading />}
 
 			<CustomPagination
 				handleInputChange={handleInputChange}
@@ -158,26 +138,6 @@ const CreatorsPage = () => {
 				page={page}
 				totalPages={totalPages}
 			/>
-			{isLoading && (
-				<motion.div
-					initial={{
-						opacity: 0,
-						y: 20,
-					}}
-					animate={{
-						opacity: 1,
-						y: [20, -5, 0],
-					}}
-					transition={{
-						delay: 0.5,
-						duration: 0.5,
-						ease: [0.4, 0.0, 0.2, 1],
-					}}
-					className="text-foreground flex justify-center items-center h-1/2 w-full"
-				>
-					is Loading...
-				</motion.div>
-			)}
 		</section>
 	);
 };
