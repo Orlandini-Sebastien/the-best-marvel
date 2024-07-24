@@ -2,18 +2,9 @@
 
 import { HoverBorderGradient } from '@/components/ui/hover-border-gradient';
 import { useRouter } from 'next/navigation';
-import { useEffect, useState } from 'react';
 
 const Home = () => {
 	const router = useRouter();
-	const [isReady, setIsReady] = useState(false);
-
-	useEffect(() => {
-		if (router) {
-			setIsReady(true);
-		}
-	}, [router]);
-
 	return (
 		<section className="flex flex-col justify-center gap-10 p-10 w-full h-full max-w-7xl m-auto">
 			<h1 className="h1 flex justify-center ">Marvel Universe </h1>
@@ -28,54 +19,52 @@ const Home = () => {
 				a whole new way!`}
 			</p>
 			<div className="flex gap-4 ">
-				{isReady && (
-					<div className="flex w-full justify-around">
-						<HoverBorderGradient
-							onClick={() => router.push('/comics')}
-							containerClassName="rounded-full"
-							as="button"
-							className="p-4 dark:bg-black bg-white text-black dark:text-white flex items-center space-x-2"
-						>
-							<span>Comics</span>
-						</HoverBorderGradient>
+				<div className="flex w-full justify-around">
+					<HoverBorderGradient
+						onClick={() => router.push('/comics')}
+						containerClassName="rounded-full"
+						as="button"
+						className="p-4 dark:bg-black bg-white text-black dark:text-white flex items-center space-x-2"
+					>
+						<span>Comics</span>
+					</HoverBorderGradient>
 
-						<HoverBorderGradient
-							onClick={() => router.push('/characters')}
-							containerClassName="rounded-full"
-							as="button"
-							className="p-4 dark:bg-black bg-white text-black dark:text-white flex items-center space-x-2"
-						>
-							<span>Characters</span>
-						</HoverBorderGradient>
+					<HoverBorderGradient
+						onClick={() => router.push('/characters')}
+						containerClassName="rounded-full"
+						as="button"
+						className="p-4 dark:bg-black bg-white text-black dark:text-white flex items-center space-x-2"
+					>
+						<span>Characters</span>
+					</HoverBorderGradient>
 
-						<HoverBorderGradient
-							onClick={() => router.push('/creators')}
-							containerClassName="rounded-full"
-							as="button"
-							className="p-4 dark:bg-black bg-white text-black dark:text-white flex items-center space-x-2"
-						>
-							<span>Creators</span>
-						</HoverBorderGradient>
+					<HoverBorderGradient
+						onClick={() => router.push('/creators')}
+						containerClassName="rounded-full"
+						as="button"
+						className="p-4 dark:bg-black bg-white text-black dark:text-white flex items-center space-x-2"
+					>
+						<span>Creators</span>
+					</HoverBorderGradient>
 
-						<HoverBorderGradient
-							onClick={() => router.push('/series')}
-							containerClassName="rounded-full"
-							as="button"
-							className="p-4 dark:bg-black bg-white text-black dark:text-white flex items-center space-x-2"
-						>
-							<span>Series</span>
-						</HoverBorderGradient>
+					<HoverBorderGradient
+						onClick={() => router.push('/series')}
+						containerClassName="rounded-full"
+						as="button"
+						className="p-4 dark:bg-black bg-white text-black dark:text-white flex items-center space-x-2"
+					>
+						<span>Series</span>
+					</HoverBorderGradient>
 
-						<HoverBorderGradient
-							onClick={() => router.push('/events')}
-							containerClassName="rounded-full"
-							as="button"
-							className="p-4 dark:bg-black bg-white text-black dark:text-white flex items-center space-x-2"
-						>
-							<span>Events</span>
-						</HoverBorderGradient>
-					</div>
-				)}
+					<HoverBorderGradient
+						onClick={() => router.push('/events')}
+						containerClassName="rounded-full"
+						as="button"
+						className="p-4 dark:bg-black bg-white text-black dark:text-white flex items-center space-x-2"
+					>
+						<span>Events</span>
+					</HoverBorderGradient>
+				</div>
 			</div>
 		</section>
 	);
