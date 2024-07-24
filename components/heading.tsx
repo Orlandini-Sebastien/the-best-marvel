@@ -20,7 +20,7 @@ const Heading: React.FC<HeadingProps> = ({
 }) => {
 	return (
 		<>
-			{' '}
+		
 			<HeroHighlight>
 				<motion.h1
 					initial={{

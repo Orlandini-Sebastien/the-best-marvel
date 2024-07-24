@@ -130,10 +130,6 @@ const EventsPage = () => {
 
 	return (
 		<section>
-			<div className="flex justify-between">
-				<ModeToggle />
-			</div>
-
 			<Heading
 				title1="Mavel Univers"
 				title2="Events"
@@ -148,16 +144,6 @@ const EventsPage = () => {
 			/>
 
 			{isLoading ? (
-				<div>Loading...</div>
-			) : (
-				<div className="h-screen py-20 w-full">
-					<LayoutGrid cards={cards} />
-				</div>
-			)}
-
-			{!isLoading && <div className="h-[1500px] max-md:h-[3700px]" />}
-
-			{isLoading && (
 				<motion.div
 					initial={{ opacity: 0, y: 20 }}
 					animate={{ opacity: 1, y: [20, -5, 0] }}
@@ -166,7 +152,13 @@ const EventsPage = () => {
 				>
 					is Loading...
 				</motion.div>
+			) : (
+				<div className="h-screen py-20 w-full">
+					<LayoutGrid cards={cards} />
+				</div>
 			)}
+
+			{!isLoading && <div className="h-[1300px] max-md:h-[3500px]" />}
 
 			<CustomPagination
 				handleInputChange={handleInputChange}

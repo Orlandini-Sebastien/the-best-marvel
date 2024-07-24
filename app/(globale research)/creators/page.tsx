@@ -96,10 +96,6 @@ const CreatorsPage = () => {
 
 	return (
 		<section>
-			<div className="flex justify-between">
-				<ModeToggle />
-			</div>
-
 			<Heading
 				title1="Mavel Univers"
 				title2="Creator"
