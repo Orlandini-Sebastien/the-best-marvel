@@ -19,13 +19,13 @@ const Home = () => {
 			<h1 className="h1 flex justify-center ">Marvel Universe </h1>
 			<h1 className="h1 flex justify-center">Front-End Design Explorer</h1>
 			<p className="h5 px-20 text-center py-10">
-				This is a front-end design application for experimenting with different
+				{`	This is a front-end design application for experimenting with different
 				types of presentations using various themes from the Marvel universe.
 				One presentation showcases the Comics with a card that has a 3D effect.
 				Another presentation draws inspiration mainly from the Characters,
 				featuring cards with larger images for the series. There's also a truly
 				smooth effect for the events. Dive in and explore the Marvel universe in
-				a whole new way!
+				a whole new way!`}
 			</p>
 			<div className="flex gap-4 ">
 				{isReady && (
