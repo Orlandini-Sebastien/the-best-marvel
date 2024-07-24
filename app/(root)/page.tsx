@@ -2,13 +2,30 @@
 
 import { HoverBorderGradient } from '@/components/ui/hover-border-gradient';
 import { useRouter } from 'next/navigation';
+import React, { Suspense, useRef } from 'react';
+import { Canvas } from '@react-three/fiber';
+import { OrbitControls, Stage } from '@react-three/drei';
+import { Model } from '@/components/model';
 
 const Home = () => {
+	const ref = useRef();
 	const router = useRouter();
 	return (
 		<section className="flex flex-col justify-center gap-10 p-10 w-full h-full max-w-7xl m-auto">
 			<h1 className="h1 flex justify-center ">Marvel Universe </h1>
 			<h1 className="h1 flex justify-center">Front-End Design Explorer</h1>
+
+			<section className="h-96 -mt-32 -mb-32">
+				<Canvas shadows dpr={[1, 2]} camera={{ fov: 50, position: [0, 0, 5] }}>
+					<Suspense fallback={null}>
+						<Stage preset="rembrandt" intensity={1} environment="city">
+							<Model />
+						</Stage>
+					</Suspense>
+					<OrbitControls autoRotate enableZoom={false} />
+				</Canvas>
+			</section>
+
 			<p className="h5 px-20 text-center py-10">
 				{`	This is a front-end design application for experimenting with different
 				types of presentations using various themes from the Marvel universe.
