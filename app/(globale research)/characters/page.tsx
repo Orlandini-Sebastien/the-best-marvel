@@ -98,7 +98,7 @@ const CharactersPage = () => {
 	return (
 		<section>
 			<Heading
-				title1="Mavel Univers"
+				title1="Mavel Universe"
 				title2="Characters"
 				title3="Catalog"
 				title4="Click a Card to Dive Deeper into Your Favorite Character!"

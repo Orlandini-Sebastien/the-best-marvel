@@ -7,7 +7,7 @@ import { ThemeProvider } from '@/components/theme-provider';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-	title: 'Marvel Univers',
+	title: 'Marvel Universe',
 	description: 'Characters, Comics, Events & Series Catalogs',
 };
 
@@ -20,7 +20,6 @@ export default function RootLayout({
 		<html lang="en" suppressHydrationWarning>
 			<body className={inter.className}>
 				<ThemeProvider attribute="class" defaultTheme="dark">
-					
 					{children}
 				</ThemeProvider>
 			</body>

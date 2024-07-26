@@ -126,7 +126,7 @@ const EventsPage = () => {
 	return (
 		<section>
 			<Heading
-				title1="Mavel Univers"
+				title1="Mavel Universe"
 				title2="Events"
 				title3="List"
 				title4="Click a Card to Dive Deeper into an Event !"

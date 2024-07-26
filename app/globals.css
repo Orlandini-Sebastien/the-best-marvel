@@ -8,6 +8,10 @@
 	--font-comic: 'Comic Neue', sans-serif;
 }
 
+.text-shadow {
+	text-shadow: 5px 5px 10px #e42142;
+}
+
 @layer base {
 	:root {
 		--background: 0 0% 100%;
