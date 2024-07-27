@@ -22,32 +22,33 @@ const Home = () => {
 			className="bg-cover bg-center bg-no-repeat h-[100vh] flex"
 			style={{ backgroundImage: `url(/wallpaper.webp)` }}
 		>
-			<section className="flex flex-col m-auto   justify-center gap-10 p-10 w-full max-w-7xl ">
+			<section className="flex flex-col m-auto justify-between gap-10 p-10 w-full max-w-7xl h-[75vh]">
 				<Spotlight
 					className="-top-40 left-0 md:left-60 md:-top-20"
 					fill="white"
 				/>
+				<h1>
+					<motion.h1
+						initial="hidden"
+						animate="visible"
+						variants={textVariant}
+						transition={{ duration: 0.8, ease: 'easeOut' }}
+						className="h1 flex justify-center items-center z-40 text-shadow text-outline text-shadow  "
+					>
+						Marvel Universe{' '}
+					</motion.h1>
+					<motion.h1
+						initial="hidden"
+						animate="visible"
+						variants={textVariant}
+						transition={{ delay: 0.5, duration: 0.8, ease: 'easeOut' }}
+						className="h1 flex justify-center items-center text-center z-40 text-shadow text-outline drop-shadow-2xl"
+					>
+						Front-End Design Explorer
+					</motion.h1>
+				</h1>
 
-				<motion.h1
-					initial="hidden"
-					animate="visible"
-					variants={textVariant}
-					transition={{ duration: 0.8, ease: 'easeOut' }}
-					className="h1 flex justify-center items-center z-40 text-shadow text-outline text-shadow  "
-				>
-					Marvel Universe{' '}
-				</motion.h1>
-				<motion.h1
-					initial="hidden"
-					animate="visible"
-					variants={textVariant}
-					transition={{ delay: 0.5, duration: 0.8, ease: 'easeOut' }}
-					className="h1 flex justify-center items-center text-center z-40 text-shadow text-outline drop-shadow-2xl"
-				>
-					Front-End Design Explorer
-				</motion.h1>
-
-				<section className="h-96 -mt-20 -mb-20">
+				<section className="h-96 -mt-32 -mb-40">
 					<Canvas
 						shadows
 						dpr={[1, 2]}
@@ -69,10 +70,11 @@ const Home = () => {
 						featuring cards with larger images for the series. There's also a truly
 						smooth effect for the events. Dive in and explore the Marvel universe in
 						a whole new way!`}
-					className="max-md:hidden h5 px-10 text-center py-10  opacity-70"
+					className="max-md:hidden h5 px-10 text-center  opacity-70"
 				/>
 
 				<motion.div
+				
 					initial="hidden"
 					animate="visible"
 					variants={textVariant}
@@ -84,12 +86,12 @@ const Home = () => {
 					}}
 					className="flex max-xl:flex-col justify-around"
 				>
-					<div className="flex w-full justify-around ">
+					<div className="flex w-full justify-around max-md:py-5 max-md:px-20  ">
 						<HoverBorderGradient
 							onClick={() => router.push('/comics')}
 							containerClassName="rounded-full"
 							as="button"
-							className="p-4 dark:bg-black bg-white text-black dark:text-white flex items-center space-x-2 text-shadow"
+							className="p-4 dark:bg-black bg-white text-black dark:text-white flex items-center space-x-2 text-shadow w-40 justify-center"
 						>
 							<span>Comics</span>
 						</HoverBorderGradient>
@@ -98,26 +100,26 @@ const Home = () => {
 							onClick={() => router.push('/characters')}
 							containerClassName="rounded-full"
 							as="button"
-							className="p-4 dark:bg-black bg-white text-black dark:text-white flex items-center space-x-2 text-shadow"
+							className="p-4 dark:bg-black bg-white text-black dark:text-white flex items-center space-x-2 text-shadow w-40 justify-center"
 						>
 							<span>Characters</span>
 						</HoverBorderGradient>
 					</div>
-					<div className="flex w-full justify-around ">
-						<HoverBorderGradient
+					<div className="flex w-full justify-around max-md:py-5 max-md:px-20">
+						{/* <HoverBorderGradient
 							onClick={() => router.push('/creators')}
 							containerClassName="rounded-full"
 							as="button"
-							className="p-4 dark:bg-black bg-white text-black dark:text-white flex items-center space-x-2 text-shadow"
+							className="p-4 dark:bg-black bg-white text-black dark:text-white flex items-center space-x-2 text-shadow w-40 justify-center"
 						>
 							<span>Creators</span>
-						</HoverBorderGradient>
+						</HoverBorderGradient> */}
 
 						<HoverBorderGradient
 							onClick={() => router.push('/series')}
 							containerClassName="rounded-full"
 							as="button"
-							className="p-4 dark:bg-black bg-white text-black dark:text-white flex items-center space-x-2 text-shadow"
+							className="p-4 dark:bg-black bg-white text-black dark:text-white flex items-center space-x-2 text-shadow w-40 justify-center"
 						>
 							<span>Series</span>
 						</HoverBorderGradient>
@@ -126,7 +128,7 @@ const Home = () => {
 							onClick={() => router.push('/events')}
 							containerClassName="rounded-full"
 							as="button"
-							className="p-4 dark:bg-black bg-white text-black dark:text-white flex items-center space-x-2 text-shadow"
+							className="p-4 dark:bg-black bg-white text-black dark:text-white flex items-center space-x-2 text-shadow w-40 justify-center"
 						>
 							<span>Events</span>
 						</HoverBorderGradient>
