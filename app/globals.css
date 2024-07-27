@@ -104,19 +104,19 @@
 		@apply font-semibold text-base max-md:text-xs leading-8;
 	}
 	.top40 {
-		top: 5px;
+		top: 20px;
 	}
 	.top80 {
-		top: 435px;
+		top: 455px;
 	}
 	.top120 {
-		top: 865px;
+		top: 895px;
 	}
 	.top160 {
-		top: 1295px;
+		top: 1335px;
 	}
 	.top200 {
-		top: 1735px;
+		top: 1775px;
 	}
 }
 

@@ -29,7 +29,7 @@ export async function GET(req: Request) {
 			apikey: publicKey,
 			ts: timestamp,
 			hash: hash,
-			orderBy: 'modified',
+			
 		};
 
 		// Ajouter le titre aux paramètres uniquement s'il n'est pas vide

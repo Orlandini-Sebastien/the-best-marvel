@@ -17,6 +17,8 @@ import CustomPagination from '@/components/custom-pagination';
 import { LayoutGrid } from '@/components/layout-grid-events';
 import IsLoading from '@/components/isLoading';
 
+import cache_page1 from '@/public/events_page1.json';
+
 const EventsPage = () => {
 	// fetch data
 	const [data, setData] = useState<Event[]>([]);
@@ -89,7 +91,12 @@ const EventsPage = () => {
 				toast.error('Something went wrong!');
 			}
 		};
-		fetchData();
+		const cache = () => {
+			setData(cache_page1);
+			setIsLoading(false);
+			setTotalPages(4);
+		};
+		page === 1 && title === '' ? cache() : fetchData();
 	}, [page, debounceTitle]);
 
 	const Skeleton = ({ event }: { event: Event }) => {
@@ -138,15 +145,11 @@ const EventsPage = () => {
 				onTitleChange={onTitleChange}
 			/>
 
-			{isLoading ? (
-				<IsLoading />
-			) : (
-				<div className="h-screen py-20 w-full">
-					<LayoutGrid cards={cards} />
-				</div>
-			)}
-
-			{!isLoading && <div className="h-[1300px] max-md:h-[3500px]" />}
+			{isLoading && <IsLoading />}
+			<div className="h-[200vh] max-md:h-[400vh] py-20 w-full">
+				<LayoutGrid cards={cards} />
+			</div>
+			{isLoading && <IsLoading />}
 
 			<CustomPagination
 				handleInputChange={handleInputChange}

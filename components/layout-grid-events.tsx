@@ -41,14 +41,14 @@ export const LayoutGrid = ({ cards }: { cards: Card[] }) => {
 							selected?.id === card.id
 								? ` ${
 										i < 4
-											? 'md:top40  max-md:h-1/3'
+											? 'md:top40 md:h-1/5  max-md:h-[7%]'
 											: i < 8
-											? 'md:top80 max-md:h-1/3'
+											? 'md:top80 md:h-1/5 max-md:h-[7%]'
 											: i < 12
-											? 'md:top120 max-md:h-1/3'
+											? 'md:top120 md:h-1/5 max-md:h-[7%]'
 											: i < 16
-											? 'md:top160 max-md:h-1/3'
-											: 'md:top200 max-md:h-1/3'
+											? 'md:top160 md:h-1/5 max-md:h-[7%]'
+											: 'md:top200 md:h-1/5 max-md:h-[7%]'
 								  }  rounded-lg cursor-pointer absolute left-0 right-0  h-1/2 w-full md:w-1/2 m-auto z-50 flex justify-center items-center flex-wrap flex-col`
 								: lastSelected?.id === card.id
 								? 'z-40 bg-white rounded-xl h-full w-full'

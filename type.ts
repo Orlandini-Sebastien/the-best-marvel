@@ -44,11 +44,11 @@ export interface Serie {
 export interface Event {
 	id: number;
 	title: string;
-	description: string;
+	description: string | null;
 	thumbnail: {
 		path: string;
 		extension: string;
 	};
-	start: Date;
-	end: Date;
+	start: string | null;
+	end: string | null;
 }
