@@ -1,7 +1,7 @@
 export interface Comic {
 	id: number;
 	title: string;
-	description: string;
+	description: string | null;
 	thumbnail: {
 		path: string;
 		extension: string;
@@ -34,7 +34,7 @@ export interface Creator {
 export interface Serie {
 	id: number;
 	title: string;
-	description: string;
+	description: string | null;
 	thumbnail: {
 		path: string;
 		extension: string;

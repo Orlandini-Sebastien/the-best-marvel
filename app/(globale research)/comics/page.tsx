@@ -19,6 +19,8 @@ import SearchBar from '@/components/search-bar';
 import CustomPagination from '@/components/custom-pagination';
 import IsLoading from '@/components/isLoading';
 
+import cache_page1 from '@/public/comics_page1.json';
+
 const ComicsPage = () => {
 	// fetch data
 	const [data, setData] = useState<Comic[]>([]);
@@ -91,7 +93,13 @@ const ComicsPage = () => {
 				toast.error('Something went wrong!');
 			}
 		};
-		fetchData();
+
+		const cache = () => {
+			setData(cache_page1);
+			setIsLoading(false);
+			setTotalPages(79);
+		};
+		page === 1 && title === '' ? cache() : fetchData();
 	}, [page, debounceTitle]);
 
 	return (
@@ -109,6 +117,8 @@ const ComicsPage = () => {
 			/>
 			{isLoading && <IsLoading />}
 			<HoverEffect items={data} />
+			{isLoading && <IsLoading />}
+
 			<CustomPagination
 				handleInputChange={handleInputChange}
 				handleKeyDown={handleKeyDown}

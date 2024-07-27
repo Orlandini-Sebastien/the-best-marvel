@@ -38,7 +38,6 @@ export const DirectionAwareHover = ({
 		if (!ref) return;
 
 		const direction = getDirection(event, ref);
-		console.log('direction', direction);
 		setDirections((prevDirections) => {
 			const newDirections = [...prevDirections];
 			switch (direction) {
@@ -90,7 +89,7 @@ export const DirectionAwareHover = ({
 							<motion.div
 								className="relative h-full w-full"
 								initial="initial"
-								whileHover={directions[index]}
+								animate={directions[index]} // Use animate instead of whileHover
 								exit="exit"
 							>
 								<motion.div className="group-hover/card:block hidden absolute inset-0 w-full h-full bg-black/40 z-10 transition duration-500" />
@@ -126,12 +125,14 @@ export const DirectionAwareHover = ({
 										ease: 'easeOut',
 									}}
 									className={cn(
-										'text-white absolute top-4 left-4 z-40 max-h-[380px] overflow-y-scroll',
+										'text-white absolute top-4 left-4 z-40 p-4 ',
 										childrenClassName
 									)}
 								>
 									<div className="h5">{serie.title}</div>
-									<div className="h6">{serie.description}</div>
+									<div className="h6 max-h-[300px]  overflow-y-auto ">
+										{serie.description}
+									</div>
 								</motion.div>
 							</motion.div>
 						</AnimatePresence>

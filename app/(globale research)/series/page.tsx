@@ -16,6 +16,7 @@ import { DirectionAwareHover } from '@/components/direction-aware-hover-series';
 import SearchBar from '@/components/search-bar';
 import CustomPagination from '@/components/custom-pagination';
 import IsLoading from '@/components/isLoading';
+import cache_page1 from '@/public/series_page1.json';
 
 const SeriesPage = () => {
 	// fetch data
@@ -89,7 +90,12 @@ const SeriesPage = () => {
 				toast.error('Something went wrong!');
 			}
 		};
-		fetchData();
+		const cache = () => {
+			setData(cache_page1);
+			setIsLoading(false);
+			setTotalPages(752);
+		};
+		page === 1 && title === '' ? cache() : fetchData();
 	}, [page, debounceTitle]);
 
 	return (
@@ -107,8 +113,8 @@ const SeriesPage = () => {
 				onTitleChange={onTitleChange}
 			/>
 
+			{isLoading && <IsLoading />}
 			<DirectionAwareHover data={data} />
-
 			{isLoading && <IsLoading />}
 
 			<CustomPagination

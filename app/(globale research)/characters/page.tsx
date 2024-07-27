@@ -98,9 +98,9 @@ const CharactersPage = () => {
 		const cache = () => {
 			setData(Cache_page1);
 			setIsLoading(false);
-			setTotalPages(78);
+			setTotalPages(3051);
 		};
-		page === 1 ? cache() : fetchData();
+		page === 1 && name === '' ? cache() : fetchData();
 	}, [page, debounceName]);
 
 	return (
@@ -121,7 +121,7 @@ const CharactersPage = () => {
 			{isLoading && <IsLoading />}
 
 			<WaterDropCards items={data} />
-
+			{isLoading && <IsLoading />}
 			<CustomPagination
 				handleInputChange={handleInputChange}
 				handleKeyDown={handleKeyDown}
