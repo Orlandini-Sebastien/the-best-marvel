@@ -17,6 +17,8 @@ import WaterDropCards from '@/components/water-drop-cards-characters';
 import SearchBar from '@/components/search-bar';
 import CustomPagination from '@/components/custom-pagination';
 
+import Cache_page1 from '@/public/characters_page1.json';
+
 const CharactersPage = () => {
 	// loading
 	const [isLoading, setIsLoading] = useState(true);
@@ -92,7 +94,13 @@ const CharactersPage = () => {
 				toast.error('Something went wrong!');
 			}
 		};
-		fetchData();
+
+		const cache = () => {
+			setData(Cache_page1);
+			setIsLoading(false);
+			setTotalPages(78);
+		};
+		page === 1 ? cache() : fetchData();
 	}, [page, debounceName]);
 
 	return (
