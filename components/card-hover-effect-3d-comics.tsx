@@ -18,7 +18,7 @@ export const HoverEffect = ({
 	return (
 		<div
 			className={cn(
-				'grid grid-cols-1 lg:grid-cols-2  min-[1330px]:grid-cols-3  gap-10 border-2',
+				'grid grid-cols-1 lg:grid-cols-2  min-[1330px]:grid-cols-3  gap-10 ',
 				className
 			)}
 		>
