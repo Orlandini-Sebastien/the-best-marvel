@@ -20,9 +20,9 @@ const HomeNav = () => {
 				ease: 'easeOut',
 				staggerChildren: 0.2,
 			}}
-			className="flex max-md:h-[33vh]  h-[17vh] max-md:flex-col max-md:w-[40vw] md:w-[70vw] self-center"
+			className="flex max-md:h-[33vh]  h-[17vh] max-md:flex-col max-md:w-[40vw] md:w-[70vw] self-center max-md:gap-1"
 		>
-			<div className="flex w-full justify-around max-md:p-1">
+			<div className="flex w-full justify-around max-md:gap-1 ">
 				<HoverBorderGradient
 					onClick={() => router.push('/comics')}
 					containerClassName="rounded-full"
@@ -41,7 +41,7 @@ const HomeNav = () => {
 					<span>Characters</span>
 				</HoverBorderGradient>
 			</div>
-			<div className="flex w-full justify-around max-md:p-1">
+			<div className="flex w-full justify-around max-md:gap-1">
 				{/* <HoverBorderGradient
 							onClick={() => router.push('/creators')}
 							containerClassName="rounded-full"
