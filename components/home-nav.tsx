@@ -20,7 +20,7 @@ const HomeNav = () => {
 				ease: 'easeOut',
 				staggerChildren: 0.2,
 			}}
-			className="flex max-md:h-[33vh]  h-[17vh] max-md:flex-col max-md:w-[40vw] md:w-[70vw] self-center max-md:gap-1"
+			className="flex max-md:h-[33vh] min-w-60  h-[17vh] max-md:flex-col max-md:w-[40vw] md:w-[70vw] self-center max-md:gap-1"
 		>
 			<div className="flex w-full justify-around max-md:gap-1 ">
 				<HoverBorderGradient
@@ -42,14 +42,6 @@ const HomeNav = () => {
 				</HoverBorderGradient>
 			</div>
 			<div className="flex w-full justify-around max-md:gap-1">
-				{/* <HoverBorderGradient
-							onClick={() => router.push('/creators')}
-							containerClassName="rounded-full"
-							as="button"
-							className="p-4 dark:bg-black bg-white text-black dark:text-white flex items-center space-x-2 text-shadow w-40 justify-center"
-						>
-							<span>Creators</span>
-						</HoverBorderGradient> */}
 
 				<HoverBorderGradient
 					onClick={() => router.push('/series')}

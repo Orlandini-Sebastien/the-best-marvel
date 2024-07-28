@@ -15,7 +15,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
 	onTitleChange,
 }) => {
 	return (
-		<div className="flex flex-col justify-center items-center gap-3 md:mb-10  ">
+		<div className="flex flex-col justify-center items-center gap-3 mb-10  ">
 			<div className="max-md:h5 h3">{title}</div>
 			<div className="relative flex w-1/3 max-md:w-full md:min-w-96">
 				<Search className="absolute w-6 h-6 top-1/2 transform -translate-y-1/2 left-3 text-gray-500" />

@@ -146,7 +146,7 @@ const EventsPage = () => {
 			/>
 
 			{isLoading && <IsLoading />}
-			<div className="h-[200vh] max-md:h-[400vh] py-20 w-full">
+			<div className="h-[200vh] max-md:h-[500vh] md:py-20  w-full">
 				<LayoutGrid cards={cards} />
 			</div>
 			{isLoading && <IsLoading />}

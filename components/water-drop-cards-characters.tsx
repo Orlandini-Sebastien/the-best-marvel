@@ -83,7 +83,7 @@ const WaterDropCards: React.FC<WaterDropCardsProps> = ({ items }) => {
 	};
 
 	return (
-		<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2 justify-items-center pt-40 pb-40 overflow-hidden">
+		<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2 justify-items-center pt-40 pb-40 overflow-hidden max-md:-my-40">
 			{items.map((item) => (
 				<Link
 					href={'characters/' + item?.id.toString()}

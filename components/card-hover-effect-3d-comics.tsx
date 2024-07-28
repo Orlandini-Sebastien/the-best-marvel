@@ -18,7 +18,7 @@ export const HoverEffect = ({
 	return (
 		<div
 			className={cn(
-				'grid grid-cols-1 lg:grid-cols-2  min-[1330px]:grid-cols-3  gap-10',
+				'grid grid-cols-1 lg:grid-cols-2  min-[1330px]:grid-cols-3  gap-10 border-2',
 				className
 			)}
 		>
@@ -26,7 +26,7 @@ export const HoverEffect = ({
 				<Link
 					href={'comics/' + item?.id.toString()}
 					key={item?.id}
-					className="relative group block h-full w-full md:p-2  max-md:w-1/3 max-md:h-1/3 max-md:mx-auto  "
+					className="relative group block h-full w-full md:p-2 max-md:h-1/3 max-md:mx-auto scale-75 -my-10  "
 					onMouseEnter={() => setHoveredIndex(item?.id.toString())}
 					onMouseLeave={() => setHoveredIndex(null)}
 				>

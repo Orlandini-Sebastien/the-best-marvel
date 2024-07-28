@@ -70,7 +70,7 @@ export const DirectionAwareHover = ({
 	};
 
 	return (
-		<div className="grid self-center justify-center items-center grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-10 p-10">
+		<div className="grid self-center  justify-center items-center  grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-10 p-10 max-lg:flex max-lg:flex-col">
 			{data.map((serie, index) =>
 				serie.thumbnail.path !==
 				'http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available' ? (
@@ -80,7 +80,7 @@ export const DirectionAwareHover = ({
 							refs.current[index] = el;
 						}}
 						className={cn(
-							'md:h-96 w-60 h-60 md:w-96 bg-transparent rounded-lg overflow-hidden group/card relative',
+							'flex  md:h-96 w-60 h-60 md:w-96  bg-transparent rounded-lg overflow-hidden group/card relative',
 							className
 						)}
 						key={serie.id}
