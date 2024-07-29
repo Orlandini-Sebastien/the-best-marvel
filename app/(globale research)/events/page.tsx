@@ -103,7 +103,9 @@ const EventsPage = () => {
 		return (
 			<div className="flex flex-col gap-4">
 				<p className="h2 text-white">{event.title}</p>
-				<p className="font-normal text-base text-white">{event.description}</p>
+				<p className="font-normal text-base text-white max-h-60 overflow-y-scroll">
+					{event.description}
+				</p>
 				<p className="h6 underline">
 					{event.start && new Date(event.start).toLocaleDateString()} {'/'}{' '}
 					{event.end && new Date(event.end).toLocaleDateString()}{' '}
@@ -146,7 +148,7 @@ const EventsPage = () => {
 			/>
 
 			{isLoading && <IsLoading />}
-			<div className="h-[200vh] max-md:h-[500vh] md:py-20  w-full">
+			<div className="h-[2400px] max-md:h-[5000px] md:py-20  w-full">
 				<LayoutGrid cards={cards} />
 			</div>
 			{isLoading && <IsLoading />}
