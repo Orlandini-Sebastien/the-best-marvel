@@ -1,36 +1,48 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Marvel 3D Element Project
 
-## Getting Started
+Just finished this front-end training by adding a Marvel-themed 3D element ⚡️❗️
 
-First, run the development server:
+## Overview
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+For the first page, I’m using Three.js, react-three/drei, and react-three/fiber to create a truly marvelous effect 😍. This is the kind of effect I’ve been dreaming about for a long time, and it’s incredibly satisfying to see it come to life and achieve what I set out to do. 
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+👀 If you want to see a preview for yourself, you can check out the link provided.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Features
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+### Events
+I’ve introduced a direction-aware hover effect using Framer Motion to enhance the user experience. Each interaction is designed to be fluid and responsive, making the site feel lively and engaging.
 
-## Learn More
+### Characters: Raindrop Design
+Allow me to introduce Raindrop 🌧️! In this design, each card is shaped like a raindrop, featuring a red gradient border. I've added a parallax effect to each drop individually, creating a unique visual experience.
 
-To learn more about Next.js, take a look at the following resources:
+☄️ When you hover over a drop, it either displays a glare effect if there’s no image or a pop-up showing the title and description if there is one.  
+📱 The entire design is fully responsive and works seamlessly on mobile devices.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Comics Section
+🦸‍♂️ I’ve also added animations in the hero section to make it more appealing. It features several components that I discovered and customized: a 3D card effect, a card hover effect, and a grid/dot background. More design ideas are in the works.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## Technical Implementation
 
-## Deploy on Vercel
+⚡️ Additionally, I used ShadCN/UI for the search bar, pagination, and dark mode.  
+🛠️ To fetch data, I integrated the Marvel API and built a mini router. This project is developed with Tailwind CSS and Next.js.  
+💡 I also implemented a custom debounced hook to prevent excessive requests, optimizing the performance of the application.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Technologies Used
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- **Next.js**
+- **React**
+- **TypeScript**
+- **Tailwind CSS**
+- **Three.js**
+- **Framer Motion**
+- **ShadCN/UI**
+- **Marvel API**
+
+## Hashtags
+
+#ActernityUI #NextJS #TailwindCSS #WebDevelopment #UI #UX #ShadCNUI #MarvelAPI #3DEffects #DarkMode #SearchBar #CustomDesign #FrontendDevelopment #React #Design #UXDesign #UIDesign #WebDesign #ResponsiveDesign #ParallaxEffect #CreativeDesign #KeepCoding #NestJs #ReactJs #TypeScript #Javascript #Aceternity #FramerMotion #HoverEffect #Coding #Animation #Tech #Programming #CreativeCoding #Achievement #3D #Marvel
+
+---
+
+Feel free to explore the code and provide feedback. Keep coding and enjoy the creative process!
