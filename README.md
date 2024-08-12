@@ -22,6 +22,10 @@ Allow me to introduce Raindrop 🌧️! In this design, each card is shaped like
 ### Comics Section
 🦸‍♂️ I’ve also added animations in the hero section to make it more appealing. It features several components that I discovered and customized: a 3D card effect, a card hover effect, and a grid/dot background. More design ideas are in the works.
 
+### Series : Another design 🎆 ❗️
+
+A direction-aware hover effect using Framer Motion.
+
 ## Technical Implementation
 
 ⚡️ Additionally, I used ShadCN/UI for the search bar, pagination, and dark mode.  
